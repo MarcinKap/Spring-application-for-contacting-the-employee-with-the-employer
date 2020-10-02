@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<http lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="document/head :: head_section">
+
+    </head>
+
+    <body>
+
+    <div th:replace="document/content :: content_section_title"></div>
+
+        <div class="login-page">
+
+            <div class="login-box">
+            <div class="login">
+                Logowanie
+            </div>
+            <hr>
+            <form th:action="@{/signin}" method="post">
+
+                <div th:text="${message}" th:class="success"></div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="username" placeholder="login" required="required"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="password" placeholder="password" required="required"/>
+                    </div>
+                </div>
+
+                <div th:text="${loginErrorMessage}" class="error"></div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-sm h-d-btn" style="color: white">
+                        Logowanie
+                    </button>
+                </div>
+
+            </form>
+           <p style="margin-bottom: 5px"> Jeśli nie masz jeszcze konta, naduś przycisk na dole</p>
+            <a href="/register">
+                <button class="btn btn-primary btn-sm h-d-btn"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/signinoptions' ? 'active-2nd-option':''}">
+                    <i> Rejestracja</i>
+                </button>
+            </a>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+    </body>
+
+    <footer th:replace="document/footer :: footer_section"></footer>
+</http>

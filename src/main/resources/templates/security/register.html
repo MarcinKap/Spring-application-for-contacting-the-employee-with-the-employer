@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="document/head :: head_section"></head>
+
+<body>
+
+    <div th:replace="document/content :: content_section_title"></div>
+
+
+    <div class="login-page">
+
+        <div class="login-box">
+            <div class="login">
+                Rejestracja
+            </div>
+            <hr>
+            <form action="#" th:action="@{/signup}" th:object="${loginUser}" method="post">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" th:field="*{email}" placeholder="Email" class="form-control" required="required">
+                    </div>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:class="error"></div>
+                </div>
+
+                <div class="form-group">
+                        <div class="input-group">
+                            <input type="password" th:field="*{password}" placeholder="Hasło" class="form-control" required="required"/>
+                        </div>
+
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                              th:class="error"> </span>
+                </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="name" placeholder="Imię" class="form-control" required="required"/>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="lastName" placeholder="Nazwisko" class="form-control" required="required"/>
+                        </div>
+                        </div>
+
+                <br>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-sm h-d-btn" style="color: white">zarejestruj</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <footer th:replace="document/footer :: footer_section"></footer>
+</body>
+</html>
+

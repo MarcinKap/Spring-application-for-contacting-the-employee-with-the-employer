@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="document/head :: head_section">
+
+</head>
+<body>
+
+<div th:replace="document/content :: content_section_title"></div>
+
+
+<div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px">
+    <div class="col-sm-2 col-md-2 form-group border-between-rows">
+    </div>
+
+    <div class="col-sm-8 col-md-8 form-group border-between-rows">
+
+        <div th:replace="surveys package/javascript_code :: js_section" style="margin-bottom: 50px"></div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+<footer th:replace="document/footer :: footer_section"></footer>
+</html>
+
+
+
+

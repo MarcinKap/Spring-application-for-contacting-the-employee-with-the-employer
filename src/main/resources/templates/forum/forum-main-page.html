@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<meta charset="UTF-8">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<head th:replace="document/head :: head_section"></head>
+<body>
+
+<div th:replace="document/content :: content_section_title"></div>
+
+<div class="" style="margin-top: 50px">
+    <div class="row">
+
+        <hr/>
+        <div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px">
+            <div class="col-sm-2 col-md-2 form-group border-between-rows" style="height: 100%; width: 100%">
+            </div>
+            <div class="col-sm-8 col-md-8 form-group border-between-rows" style="height: 100%; width: 100%">
+                <div class="msg-wrap" style="display: block">
+                    <h1 class="thread-title">Forum</h1>
+                    <div data-th-each="thread : ${threads}">
+                        <div class="msg even" style="height: 100%">
+                            <div class="col-sm-3 col-md-3 form-group border-between-rows author">
+                                <h5 class="media-heading" style="font-size: 16px" th:text="${thread.creatorName}">
+                                    <small class="text-muted"></small>
+                                </h5>
+                                <small class="text-muted">
+                                    <i class="fa fa-clock-o" style="font-size: 14px"
+                                       th:text="${thread.getDateOfCreation()}"></i>
+                                </small>
+                            </div>
+                            <div class="col-sm-8 col-md-8 form-group border-between-rows">
+                                <form action="/forum/forum-thread" method="get">
+                                    <input type="hidden" th:value="${thread.getId()}" name="topicId">
+                                    <button style="padding: 0; border: none; background: none; text-align: left">
+                                        <h2 th:text="${thread.topic}"></h2>
+                                        <h3 th:text="${thread.getTopicFirstMsg()}"></h3>
+
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-sm-1 col-md-1 form-group border-between-rows  space-height-100">
+                                <div th:if="${thread.getId_sender()} == ${currentLoggedUserId}">
+                                    <form action="/deleteThread" method="get">
+                                        <input type="hidden" th:value="${thread.getId()}" name="threadIdToDelete">
+                                        <button type="submit" style="font-size: 20px; line-height: 100%"
+                                                class="btn btn-danger btn-sm"><i class="fa fa-trash"
+                                                                                 aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="send-wrap "
+                     th:classappend="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER') ? 'button-disable':''}">
+                    <h2> Tworzenie nowego tematu </h2>
+                    <form accept-charset="UTF-8" th:action="@{/forum/forum-thread-creator}" method="POST" role="form"
+                          class="">
+                        <div class="form-group">
+
+                            <textarea class="form-control counted" name="thread" rows="1" placeholder="Temat"
+                                      style="font-size: 14px"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control counted" rows="3" name="thread_text" placeholder="Tekst"
+                                      style="font-size: 14px"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <h6 class="pull-right" id="counter"></h6>
+                            <button class="btn btn-info" type="submit">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<footer th:replace="document/footer :: footer_section"></footer>
+</html>

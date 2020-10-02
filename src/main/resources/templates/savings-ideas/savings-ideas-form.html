@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+
+<head th:replace="document/head :: head_section">
+
+
+</head>
+<body>
+<div th:replace="document/content :: content_section_title"></div>
+
+
+<div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px; margin-bottom: 10px">
+    <div class="col-sm-3 col-md-3 form-group border-between-rows">
+    </div>
+
+    <div class="col-sm-6 col-md-6 form-group border-between-rows">
+
+        <!--<div class="container mt-5 mb-5 ">-->
+        <div class="form-sec">
+            <h4>Twój pomysł</h4>
+
+            <form th:object="${savingIdea}" th:action="@{/addSavingsIdea}" name="qryform" id="qryform" method="post"
+                  onsubmit="return(validate());"
+                  novalidate="novalidate">
+                <div class="form-group">
+                    <label>Pomysł/Idee:</label>
+                    <input type="text" th:field="*{idea_subject}" class="form-control" id="idea_subject"
+                           placeholder="Pomysł/Idee" name="pomysl">
+                </div>
+                <!--                    <div class="form-group">-->
+                <!--                        <label>Opis/Beschreibung:</label>-->
+                <!--                        <textarea th:field="*{description}" class="form-control" id="description"-->
+                <!--                                  placeholder="Opis/Beschreibung"></textarea>-->
+                <!--                    </div>-->
+                <div class="form-group">
+                    <label>Opis/Beschreibung:</label>
+                    <textarea class="form-control" th:field="*{description}"
+                              placeholder="Opis/Beschreibung" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Korzyści/Nutzen:</label>
+                    <textarea name="benefits" class="form-control" th:field="*{benefits}"
+                              placeholder="Korzyści/Nutzen" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Opłacalność / Wirtschaftlichkeit:</label>
+                    <input type="text" class="form-control" id="profitability"
+                           placeholder="Opłacalność / Wirtschaftlichkeit" th:field="*{profitability}" required>
+                </div>
+                <div class="form-group">
+                    <label>Jednostka / Einheit:</label>
+                    <select type="text" class="form-control" th:field="*{unit}" required>
+                        <option value="PLN" selected>PLN</option>
+                        <option value="EUR">EUR</option>
+                        <option value="hours">Godziny / Stunden</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label>Kategoria / Kategorie:</label>
+                    <select type="number" class="form-control" name="categoryId" required>
+                        <option selected th:each="category : ${categories}"
+                                type="number" th:value="${category.getId()}"
+                                th:text="${category.getCategoryName()}"
+
+                        >
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Charakter:</label>
+                    <select type="text" class="form-control" th:field="*{natureOfTheBenefit}" required>
+                        <option value="Jednorazowo / Einmalig" selected>
+                            Jednorazowo / Einmalig
+                        </option>
+                        <option value="Stały / Nachhaltig">
+                            Stały / Nachhaltig
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Obszar / Bereich:</label>
+                    <select type="number" class="form-control" name="workAreaId" required>
+                        <option selected th:each="workArea : ${workAreas}"
+                                th:value="${workArea.getId()}"
+                                th:text="${workArea.getName()}"
+                        >
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Rodzaj kosztów / Kostenart:</label>
+
+                    <div th:each="typesofCost : ${typesofCosts}" class="funkyradio funkyradio-primary">
+                        <input type="checkbox" th:id="${typesofCost.getId()}">
+                        <label th:for="${typesofCost.getId()}" th:text="${typesofCost.getName()}"></label>
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" id="accept-form">Wyślij</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="col-sm-3 col-md-3 form-group border-between-rows">
+
+    </div>
+
+</div>
+
+<footer th:replace="document/footer :: footer_section"></footer>
+</body>
+
+</html>

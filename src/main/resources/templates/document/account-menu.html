@@ -1,0 +1,94 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+
+<div class="searching-menu" xmlns:th="http://www.thymeleaf.org" th:fragment="account_menu">
+
+<!--    -->
+<!--    <a href="/account-menu/account-index">-->
+<!--        <button class="btn btn-primary btn-sm form-control account-menu-button"-->
+<!--                th:classappend="${#httpServletRequest.getRequestURI().startsWith('/account-menu/account-index') ? 'active-2nd-option':''}">-->
+<!--            <i> Moje ankiety</i>-->
+<!--        </button>-->
+<!--    </a>-->
+<!--    <a href="/account-menu/account-adresses">-->
+<!--        <button class="btn btn-primary btn-sm form-control account-menu-button"-->
+<!--                th:classappend="${#httpServletRequest.getRequestURI().startsWith('/account-menu/account-questions') ? 'active-2nd-option':''}">-->
+<!--            <i> Moje zapytania</i>-->
+<!--        </button>-->
+<!--    </a>-->
+<!--    <a href="/account-menu/account-private-messages">-->
+<!--        <button class="btn btn-primary btn-sm form-control account-menu-button"-->
+<!--                th:classappend="${#httpServletRequest.getRequestURI().startsWith('/account-menu/account-private-messages') ? 'active-2nd-option':''}">-->
+<!--            <i> Wiadomości prywatne</i>-->
+<!--        </button>-->
+<!--    </a>-->
+<!--    <a href="/account-menu/account-sended-messages">-->
+<!--        <button class="btn btn-primary btn-sm form-control account-menu-button"-->
+<!--                th:classappend="${#httpServletRequest.getRequestURI().startsWith('/account-menu/account-sended-messages') ? 'active-2nd-option':''}">-->
+<!--            <i> Wiadomości wysłane</i>-->
+<!--        </button>-->
+<!--    </a>-->
+<!--    <a href="/account-menu/account-data">-->
+<!--        <button class="btn btn-primary btn-sm form-control account-menu-button"-->
+<!--                th:classappend="${#httpServletRequest.getRequestURI().startsWith('/account-menu/admin-panel') ? 'active-2nd-option':''}">-->
+<!--            <i> Moje dane</i>-->
+<!--        </button>-->
+<!--    </a>-->
+<!--    <a href="/account-menu/admin">-->
+<!--        <button class="btn btn-primary btn-sm form-control account-menu-button"-->
+<!--                th:classappend="${#httpServletRequest.getRequestURI().startsWith('/account-menu/admin') ? 'active-2nd-option':''}">-->
+<!--            <i> Panel administratora</i>-->
+<!--        </button>-->
+<!--    </a>-->
+
+
+
+
+    <div class="content">
+        <div id="jquery-accordion-menu" class="jquery-accordion-menu">
+            <ul>
+                <li class="active"><a href="#"><i class="fa fa-home"></i>Strona domowa </a></li>
+                <li><a href="/account-menu/account-private-messages"><i class="fa fa-glass"></i>Prywatne Wiadomości </a></li>
+                <li><a href="/account-menu/account-sended-messages"><i class="fa fa-file-image-o"></i>Wysłane wnioski </a></li>
+                <li><a href="/account-menu/account-data"><i class="fa fa-cog"></i>Moje dane </a>
+                </li>
+
+
+
+<!--                <li><a href="#"><i class="fa fa-newspaper-o"></i>News </a></li>-->
+<!--                <li><a href="#"><i class="fa fa-suitcase"></i>Portfolio </a>-->
+<!--                    <ul class="submenu">-->
+<!--                        <li><a href="#">Web Design </a></li>-->
+<!--                        <li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span></li>-->
+<!--                        <li><a href="#">Photoshop </a></li>-->
+<!--                        <li><a href="#">Programming </a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li><a href="#"><i class="fa fa-user"></i>About </a></li>-->
+<!--                <li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>-->
+            </ul>
+
+
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

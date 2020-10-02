@@ -1,0 +1,51 @@
+<div class="container-fluid" xmlns:th="http://www.thymeleaf.org" th:fragment="content_section_title"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+    <ul class="header-panel">
+
+        <div class="page-name">
+            <img src="https://cdn.pixabay.com/photo/2016/11/07/13/04/yoga-1805784_1280.png">
+            <i th:text="#{application_name}"></i>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" class="user-name">
+            <div th:text="#{content.hello}">
+            </div>
+            <div sec:authentication="name">
+            </div>
+        </div>
+        <div th:if="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER')}">
+            <a href="/login"
+               class="btn btn-primary btn-sm h-d-btn"
+               th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active-2nd-option':''}"
+               th:text="#{content.login}">
+            </a>
+        </div>
+        <div th:if="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER')}">
+            <a class="btn btn-primary btn-sm h-d-btn" href="/register"
+               th:classappend="${#httpServletRequest.getRequestURI() == '/register' ? 'active-2nd-option':''}"
+               th:text="#{content.register}">
+            </a>
+        </div>
+        <div th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('USER')}" >
+            <a href="/logout" class="btn btn-primary btn-sm h-d-btn"
+               th:text="#{content.logout}">
+            </a>
+        </div>
+        <div th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('USER')}">
+            <a href="/account-menu/account-index" class="btn btn-primary btn-sm h-d-btn"
+               th:text="#{content.my_account}">
+            </a>
+        </div>
+    </ul>
+
+    <div th:replace="document/menu :: menu_section"></div>
+    <div class="col-sm text-center content-bn">
+            <img src="https://ocs-pl.oktawave.com/v1/AUTH_2887234e-384a-4873-8bc5-405211db13a2/autoblog/2020/02/volkswagen_caddy_2021_logo2-1180x500-c-center.jpg"/>
+                    <img src="https://d-pt.ppstatic.pl/k/r/1/18/0b/5e5f9af047fd1_p.jpg?1583741172" />
+                    <img src="https://cdn.motor1.com/images/mgl/06G1j/s1/vw-e-crafter-concept.jpg" />
+    </div>
+
+
+</div>

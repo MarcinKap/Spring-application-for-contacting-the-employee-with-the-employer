@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="document/head :: head_section">
+</head>
+<body>
+<div th:replace="document/content :: content_section_title"></div>
+
+<div class="account-page">
+
+    <div class="row col-sm-12 col-md-12 form-group">
+        <div class="col-sm-3 col-md-3 form-group border-between-rows">
+            <div th:replace="document/account-menu :: account_menu"></div>
+        </div>
+        <v class="col-sm-6 col-md-6 form-group">
+            <div class="title-font">
+                Wiadomości
+            </div>
+            <hr>
+
+            <h3 class=" text-center">Czat</h3>
+            <div class="messaging">
+                <div class="inbox_msg">
+                    <div class="inbox_people">
+                        <div class="headind_srch">
+                            <div class="recent_heading">
+                                <h4>Recent</h4>
+                            </div>
+                            <div class="srch_bar">
+                                <div class="stylish-input-group">
+                                    <input type="text" class="search-bar" placeholder="Search">
+                                    <span class="input-group-addon">
+                <button type="button">
+                    <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span></div>
+                            </div>
+                        </div>
+
+                        <!--                        //HISTORIA WSZYSTKICH WIADOMOSCI-->
+
+                        <div class="inbox_chat">
+                            <!--                        MOJ KOD-->
+                            <tr data-th-each="topic : ${topics}">
+
+                                <form action="/account-menu/account-private-messages" method="get">
+                                    <input type="hidden" th:value="${topic.getId()}" name="topicId">
+                                    <button style="width: 100%">
+
+
+                                        <div class="chat_list active_chat"
+                                             th:if="${topic.getId()}== ${current_id_message} ">
+                                            <div class="chat_people">
+                                                <div class="chat_img"><img
+                                                        src="https://ptetutorials.com/images/user-profile.png"
+                                                        alt="sunil"></div>
+                                                <div class="chat_ib">
+                                                    <h5 th:text="${topic.getMailToDisplay()}"><span class="chat_date">Dec 25</span>
+                                                    </h5>
+                                                    <p th:text="${topic.topic}">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="chat_list" th:if="${topic.getId()} != ${current_id_message} ">
+                                            <div class="chat_people">
+                                                <div class="chat_img"><img
+                                                        src="https://ptetutorials.com/images/user-profile.png"
+                                                        alt="sunil"></div>
+                                                <div class="chat_ib">
+                                                    <h5 th:text="${topic.getMailToDisplay()}"><span class="chat_date">Dec 25</span>
+                                                    </h5>
+                                                    <p th:text="${topic.topic}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </form>
+
+                            </tr>
+
+                        </div>
+                        <!--                        //HISTORIA WIADOMOSCI PO PRAWEJ - KONIEC-->
+
+
+                        <!--                        //WIADOMOSCI WLASCIWE-->
+                    </div>
+                    <div class="mesgs">
+                        <div class="msg_history">
+
+                            <!--                            Informacje z bazy danych -->
+                            <tr data-th-each="sended_message : ${sended_messages}">
+
+
+                                <div th:if="${sended_message.id_sender} != ${logged_in_user_id}">
+                                    <div class="incoming_msg">
+                                        <div class="incoming_msg_img"><img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                        </div>
+                                        <div class="received_msg">
+                                            <div class="received_withd_msg">
+                                                <p th:text="${sended_message.text_msg}">
+
+                                                </p>
+                                                <span class="time_date"  th:text="${sended_message.getCreatedDate()}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div th:if="${sended_message.id_sender} == ${logged_in_user_id} ">
+                                    <div class="outgoing_msg">
+                                        <div class="sent_msg">
+                                            <p th:text="${sended_message.text_msg}">
+                                            </p>
+                                            <span class="time_date" th:text="${sended_message.getCreatedDate()}"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </tr>
+
+                        </div>
+                        <div class="type_msg">
+                            <div class="input_msg_write">
+
+
+                                <form th:action="@{/sendMessageToPrivateMessanger}" method="POST">
+                                    <input type="text" id="email_sender" th:value="${email_sender}" name="email_sender"
+                                           hidden>
+                                    <input type="text" name="id_recipient" th:value="${logged_in_user_id}" hidden/>
+                                    <input type="text" name="topicID" th:value="${current_id_message}" hidden/>
+                                    <input type="text" name="text_msg" class="write_msg" placeholder="Type a message"/>
+
+                                    <button type="submit" class="msg_send_btn"
+                                            th:classappend="${current_id_message == null ? 'button-disable':''}">
+
+                                        <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                                    </button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </v>
+    </div>
+</div>
+
+
+</body>
+<footer th:replace="document/footer :: footer_section"></footer>
+</html>

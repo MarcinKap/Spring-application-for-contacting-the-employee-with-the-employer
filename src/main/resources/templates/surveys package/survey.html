@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="document/head :: head_section"></head>
+<body>
+<div th:replace="document/content :: content_section_title"></div>
+
+<div class="survey-page">
+
+
+
+    <p class="survey-header">Naciśnij jedną z ankiet aby do niej przejść</p>
+
+    <div class="Grid">
+
+        <div class="Grid-item">
+            <form action="/survey-selected" method="get" class="gridzik">
+                <input type="text" hidden value="lol" name="marks">
+            <button type="submit" class="survey-button  gridzik ">
+                Ankieta
+
+              </button>
+            </form>
+        </div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+        <div class="Grid-item"></div>
+    </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+</body>
+<footer th:replace="document/footer :: footer_section"></footer>
+</html>

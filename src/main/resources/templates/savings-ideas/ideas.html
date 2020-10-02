@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:fragment="ideas_section">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="form-sec panel-title">
+                        <a  data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span
+                                class=" glyphicon glyphicon-folder-close">
+                            </span>Content</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-pencil text-primary"></span><a
+                                        href="http://www.jquery2dotnet.com">Articles</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-flash text-success"></span><a
+                                        href="http://www.jquery2dotnet.com">News</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-file text-info"></span><a
+                                        href="http://www.jquery2dotnet.com">Newsletters</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-comment text-success"></span><a
+                                        href="http://www.jquery2dotnet.com">Comments</a>
+                                    <span class="badge">42</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+<!--            <div class="panel panel-default">-->
+<!--                <div class="panel-heading">-->
+<!--                    <h4 class=" form-sec panel-title">-->
+<!--                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span-->
+<!--                                class="glyphicon glyphicon-th">-->
+<!--                            </span>Modules</a>-->
+<!--                    </h4>-->
+<!--                </div>-->
+<!--                <div id="collapseTwo" class="panel-collapse collapse">-->
+<!--                    <div class="panel-body">-->
+<!--                        <table class="table">-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <a href="http://www.jquery2dotnet.com">Invoices</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <a href="http://www.jquery2dotnet.com">Shipments</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <a href="http://www.jquery2dotnet.com">Tex</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="panel panel-default">-->
+<!--                <div class="panel-heading">-->
+<!--                    <h4 class="panel-title">-->
+<!--                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span-->
+<!--                                class="glyphicon glyphicon-user">-->
+<!--                            </span>Account</a>-->
+<!--                    </h4>-->
+<!--                </div>-->
+<!--                <div id="collapseThree" class="panel-collapse collapse">-->
+<!--                    <div class="panel-body">-->
+<!--                        <table class="table">-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <a href="http://www.jquery2dotnet.com">Change Password</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <a href="http://www.jquery2dotnet.com">Notifications</a> <span-->
+<!--                                        class="label label-info">5</span>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <a href="http://www.jquery2dotnet.com">Import/Export</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <span class="glyphicon glyphicon-trash text-danger"></span><a-->
+<!--                                        href="http://www.jquery2dotnet.com" class="text-danger">-->
+<!--                                    Delete Account</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="panel panel-default">-->
+<!--                <div class="panel-heading">-->
+<!--                    <h4 class="panel-title">-->
+<!--                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span-->
+<!--                                class="glyphicon glyphicon-file">-->
+<!--                            </span>Reports</a>-->
+<!--                    </h4>-->
+<!--                </div>-->
+<!--                <div id="collapseFour" class="panel-collapse collapse">-->
+<!--                    <div class="panel-body">-->
+<!--                        <table class="table">-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <span class="glyphicon glyphicon-user"></span><a-->
+<!--                                        href="http://www.jquery2dotnet.com">Customers</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <span class="glyphicon glyphicon-tasks"></span><a-->
+<!--                                        href="http://www.jquery2dotnet.com">Products</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <span class="glyphicon glyphicon-shopping-cart"></span><a-->
+<!--                                        href="http://www.jquery2dotnet.com">Shopping Cart</a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+
+
+
+</body>
+</html>
