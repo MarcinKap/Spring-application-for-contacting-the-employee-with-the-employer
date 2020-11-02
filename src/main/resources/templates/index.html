@@ -6,48 +6,109 @@
 <div th:replace="document/content :: content_section_title"></div>
 
 
-<div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px; margin-bottom: 10px">
-    <div class="col-sm-3 col-md-3 form-group border-between-rows">
-    </div>
+<div class="survey-page">
 
-    <!--<div class="container mt-5 mb-5 ">-->
-    <div class="col-sm-6 col-md-6 form-group border-between-rows">
-        <div class="row lastest-news">
-            <h4>Aktualności (koncepcja)</h4>
-            <ul class="timeline">
-                <li>
-                    <a target="_blank" href="https://www.totoprayogo.com/#">New Web Design</a>
-                    <a href="#" class="float-right">21 March, 2014</a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi
-                        semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in
-                        sodales vehicula....</p>
+    <!--Section: Contact v.2-->
+    <section class="mb-4">
+        <div class="wrapper wrapper-content animated fadeInRight page-title">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4 ">Aktualności</h2>
+        </div>
+        <div class="row">
+        </div>
+    </section>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <!-- Timeline -->
+            <ul class="timeline" data-th-each="news : ${news_list}">
+
+                <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+<!--                    <form action="/news/news-main-page" method="get" class="timeline-item bg-white rounded ml-3 p-4 shadow">-->
+<!--                        <input type="hidden" value="1" name="id">-->
+<!--                        <button style="padding: 0; border: none; background: none; text-align: left; width: 100%">-->
+                        <div class="timeline-arrow"></div>
+
+                    <a class="h5 mb-0 disable-hover" th:href="@{'/news/news-main-page?id=' + ${news.id}}" th:text="${news.getTitle()}"></a>
+
+                    <div class="small text-gray" >
+                        <a th:href="@{'/news/news-main-page?id=' + ${news.id}}" class="text-gray fa fa-clock-o mr-1"
+                           th:text="${#temporals.format(news.getCreatedDate(), 'dd-MM-yyyy HH:mm')}"></a>
+                    </div>
+                    <a th:href="@{'/news/news-main-page?id=' + ${news.id}}" class="text-center" style="margin-top: 20px" th:text="${news.getShortText()}"></a>
+<!--                        </button>-->
+<!--                    </form>-->
                 </li>
-                <li>
-                    <a href="#">21 000 Job Seekers</a>
-                    <a href="#" class="float-right">4 March, 2014</a>
-                    <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae
-                        justo accumsan, sed semper nisi sollicitudin...</p>
-                </li>
-                <li>
-                    <a href="#">Awesome Employers</a>
-                    <a href="#" class="float-right">1 April, 2014</a>
-                    <p>Fusce ullamcorper ligula sit amet quam accumsan aliquet. Sed nulla odio, tincidunt vitae nunc
-                        vitae, mollis pharetra velit. Sed nec tempor nibh...</p>
-                </li>
-            </ul>
+
+            </ul><!-- End -->
 
         </div>
     </div>
 
-    <div class="col-sm-3 col-md-3 form-group border-between-rows">
-
-
-<!--        <div th:replace="online-chat package/global-chat :: global-chat-section"></div>-->
-
-
-    </div>
 
 </div>
+
+
+<!--<div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px; margin-bottom: 10px">-->
+<!--    <div class="col-sm-3 col-md-3 form-group border-between-rows">-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;<div class="container mt-5 mb-5 ">&ndash;&gt;-->
+<!--    <div class="col-sm-6 col-md-6 form-group border-between-rows">-->
+<!--        <div class="row lastest-news">-->
+<!--            <h4>Aktualności (koncepcja)</h4>-->
+<!--            <ul class="timeline">-->
+
+<!--                <tr data-th-each="news : ${news_list}">-->
+
+<!--                    <li>-->
+<!--                        <form action="/news/news-main-page" method="get">-->
+<!--                            <input type="hidden" value="1" name="id">-->
+<!--                            <button style="padding: 0; border: none; background: none; text-align: left; width: 100%">-->
+<!--                                <span th:text="${news.getTitle()}"></span>-->
+<!--                                <span class="float-right" th:text="${#temporals.format(news.getCreatedDate(), 'dd-MM-yyyy HH:mm')}"></span>-->
+<!--                                <p style="text-align: left" th:text="${news.getShortText()}"></p>-->
+<!--                            </button>-->
+<!--                        </form>-->
+<!--                    </li>-->
+
+
+<!--                    <li>-->
+<!--                        <a target="_blank" href="https://www.totoprayogo.com/#">New Web Design</a>-->
+<!--                        <a href="#" class="float-right">21 March, 2014</a>-->
+<!--                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi-->
+<!--                            semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula-->
+<!--                            in-->
+<!--                            sodales vehicula....</p>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="#">21 000 Job Seekers</a>-->
+<!--                        <a href="#" class="float-right">4 March, 2014</a>-->
+<!--                        <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis-->
+<!--                            vitae-->
+<!--                            justo accumsan, sed semper nisi sollicitudin...</p>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="#">Awesome Employers</a>-->
+<!--                        <a href="#" class="float-right">1 April, 2014</a>-->
+<!--                        <p>Fusce ullamcorper ligula sit amet quam accumsan aliquet. Sed nulla odio, tincidunt vitae nunc-->
+<!--                            vitae, mollis pharetra velit. Sed nec tempor nibh...</p>-->
+<!--                    </li>-->
+<!--            </ul>-->
+
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="col-sm-3 col-md-3 form-group border-between-rows">-->
+
+
+<!--        &lt;!&ndash;        <div th:replace="online-chat package/global-chat :: global-chat-section"></div>&ndash;&gt;-->
+
+
+<!--    </div>-->
+
+<!--</div>-->
 </br>
 
 

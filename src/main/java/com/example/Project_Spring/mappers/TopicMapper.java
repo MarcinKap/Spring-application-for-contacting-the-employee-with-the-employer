@@ -22,6 +22,7 @@ public class TopicMapper implements Mapper<Topic, TopicDto> {
                 .dateOfCreation(from.getDateOfCreation())
                 .forumTopic(from.getForumTopic())
                 .topicFirstMsg(from.getTopicFirstMsg())
+                .numberOfForumMessages(from.getNumberOfForumMessages())
                 .build();
     }
 
@@ -38,6 +39,7 @@ public class TopicMapper implements Mapper<Topic, TopicDto> {
                 .dateOfCreation(to.getDateOfCreation())
                 .forumTopic(to.getForumTopic())
                 .topicFirstMsg(to.getTopicFirstMsg())
+                .numberOfForumMessages(to.getNumberOfForumMessages())
                 .build();
     }
 

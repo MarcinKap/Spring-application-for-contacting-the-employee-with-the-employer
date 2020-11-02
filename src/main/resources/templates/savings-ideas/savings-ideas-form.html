@@ -93,11 +93,25 @@
                 <div class="form-group">
                     <label>Rodzaj kosztów / Kostenart:</label>
 
-                    <div th:each="typesofCost : ${typesofCosts}" class="funkyradio funkyradio-primary">
-                        <input type="checkbox" th:id="${typesofCost.getId()}">
-                        <label th:for="${typesofCost.getId()}" th:text="${typesofCost.getName()}"></label>
-                    </div>
+<!--                    <div th:each="typesofCost : ${typesofCosts}" class="funkyradio funkyradio-primary">-->
+<!--                        <input type="checkbox" th:id="${typesofCost.getId()}">-->
+<!--                        <label th:for="${typesofCost.getId()}" th:text="${typesofCost.getName()}"></label>-->
+<!--                    </div>-->
 
+                    <ul class="list-group">
+                        <div th:each="typesofCost : ${typesofCosts}">
+                        <li class="list-group-item rounded-0 d-flex align-items-left">
+                            <div class=" custom-radio">
+                                <input class="custom-control-input" th:id="${typesofCost.getId()}" type="radio" name="customRadio">
+                                <label class="custom-control-label" th:for="${typesofCost.getId()}">
+                                    <p class="mb-0" style="text-align: left; padding-left: 20px" th:text="${typesofCost.getName()}"></p>
+                                    <span class="small font-italic text-muted">Classic marinara sauce, authentic old-world pepperoni</span>
+                                </label>
+                            </div>
+                            <label th:for="${typesofCost.getId()}"></label>
+                        </li>
+                        </div>
+                    </ul>
                 </div>
 
 

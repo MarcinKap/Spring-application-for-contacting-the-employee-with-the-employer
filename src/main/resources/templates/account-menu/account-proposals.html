@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="document/head :: head_section">
+</head>
+<body>
+<div th:replace="document/content :: content_section_title"></div>
+
+<div class="account-page">
+
+    <div class="survey-page">
+        <div class="view-account">
+            <section class="module">
+                <div class="module-inner row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="padding-right: 0">
+                        <div th:replace="document/account-menu :: account_menu"></div>
+                    </div>
+
+                    <div class="content-panel  col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                        <div class="">
+                            <!-- Content wrapper start -->
+                            <div class="content-wrapper">
+                                <div class="mb80">
+                                    <div id="eventCount" class="">
+                                        <div th:each="proposal : ${proposals_list}" class="vtimeline-point">
+                                            <div class="vtimeline-block">
+                                                <div class="vtimeline-content"
+                                                     th:styleappend="${proposal.isReaded() == false} ? 'background: #f2f2f2': ''">
+                                                    <!--                                                <a href="#"><img src="https://via.placeholder.com/700x400" alt="" class="img-fluid mb20"></a>-->
+                                                    <a><h3 th:text="${proposal.getTopic()}"></h3></a>
+                                                    <ul class="post-meta list-inline">
+                                                        <li class="list-inline-item">
+                                                            <i th:if="${proposal.getNameAndSurname() != null}"
+                                                               class="fa fa-user-circle-o"></i>
+                                                            <a th:text="${proposal.getNameAndSurname() != null} ? ${proposal.getNameAndSurname()} : ${proposal.getSenderEmail()} "></a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <i class="fa fa-calendar-o"></i> <a th:text="${#temporals.format(proposal.getCreationDate(), 'dd-MM-yyyy HH:mm')}">29 June 2017</a>
+                                                        </li>
+                                                        <!--                                                       <li class="list-inline-item">-->
+                                                        <!--                                                           <i class="fa fa-tags"></i> <a href="#">Bootstrap4</a>-->
+                                                        <!--                                                       </li>-->
+                                                    </ul>
+                                                    <p th:text="${proposal.getTextMessage()}">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                        Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut
+                                                        tortor nec nulla commodo malesuada sit amet vel lacus. Fusce
+                                                        eget efficitur libero. Morbi dapibus porta quam laoreet
+                                                        placerat.
+                                                    </p><br>
+                                                    <a th:if="${proposal.getSenderId()!= null}"
+                                                       th:onclick="'javascript:updateProposal(\'' + ${proposal.getId()} + '\');'"
+                                                       th:href="@{'/account-menu/account-private-messages?friendId=' + ${proposal.getSenderId()}}"
+                                                       class="btn btn-outline-secondary btn-sm">Odpowiedz</a>
+                                                    <a th:if="${proposal.getSenderId()== null} and ${!proposal.isReaded()}"
+                                                       th:onclick="'javascript:updateProposal(\'' + ${proposal.getId()} + '\');'"
+                                                       class="btn btn-outline-secondary btn-sm">Przeczytano</a>
+<!--                                                    <a href="account-proposals-readed?proposalId=3"-->
+<!--                                                       class="btn btn-outline-secondary btn-sm">Archiwizuj</a>-->
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- Content wrapper end -->
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<footer th:replace="document/footer :: footer_section"></footer>
+</html>

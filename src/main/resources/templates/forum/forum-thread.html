@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <meta charset="UTF-8">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>-->
+<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 
 
 <head th:replace="document/head :: head_section"></head>
@@ -12,120 +12,110 @@
 
 <div th:replace="document/content :: content_section_title"></div>
 
-<div class="" style="margin-top: 50px">
-    <div class="row">
-        <!--        <div class="col-sm-3 col-md-2">-->
-        <!--            <a href="/forum/forum-threads-creator" class="btn btn-danger btn-sm btn-block" role="button">Nowy temat</a>-->
-        <!--        </div>-->
-        <!--        <div class="col-sm-9 col-md-10">-->
-        <!--            <button type="button" class="btn btn-default" data-toggle="tooltip" title="Back to inbox">-->
-        <!--                <span class="glyphicon glyphicon-arrow-left"></span> Back to inbox</button>-->
-        <!--            <button type="button" class="btn btn-default" data-toggle="tooltip" title="Remove">-->
-        <!--                <span class="glyphicon glyphicon-trash"></span> Remove</button>-->
-        <!--            &lt;!&ndash; Single button &ndash;&gt;-->
-        <!--            <div class="btn-group">-->
-        <!--                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
-        <!--                    More <span class="caret"></span>-->
-        <!--                </button>-->
-        <!--                <ul class="dropdown-menu" role="menu">-->
-        <!--                    <li><a href="#">Mark as unread</a></li>-->
-        <!--                </ul>-->
-        <!--            </div>-->
-        <!--            <div class="pull-right">-->
-        <!--                <span class="text-muted"><b>1</b> of <b>277</b></span>-->
-        <!--                <div class="btn-group btn-group-sm">-->
-        <!--                    <button type="button" class="btn btn-default">-->
-        <!--                        <span class="glyphicon glyphicon-chevron-left"></span>-->
-        <!--                    </button>-->
-        <!--                    <button type="button" class="btn btn-default">-->
-        <!--                        <span class="glyphicon glyphicon-chevron-right"></span>-->
-        <!--                    </button>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <hr/>
+<div class="survey-page">
+    <!--        <div class="col-lg-12">-->
 
+    <section class="mb-4">
+        <div class="wrapper wrapper-content animated fadeInRight page-title">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4">Forum</h2>
+            <!--Section description-->
+            <!--        <span class="text-center w-responsive mx-auto mb-5">Jeśli masz jakieś pytania, jesteśmy tu aby na nie-->
+            <!--            odpowiedzieć.</span>-->
+        </div>
+        <div class="row">
+        </div>
+    </section>
 
-        <!--    <div class="row">-->
-        <!--        <div class="col-sm-3 col-md-2">-->
-        <!--            <ul class="nav nav-pills nav-stacked">-->
-        <!--                <li><a href="#"><span class="badge pull-right">42</span> Inbox </a>-->
-        <!--                </li>-->
-        <!--                <li><a href="http://www.jquery2dotnet.com">Outbox</a></li>-->
-        <!--                <li><a href="http://www.jquery2dotnet.com"><span class="badge pull-right">3</span>Trash</a></li>-->
-        <!--            </ul>-->
-        <!--        </div>-->
+    <div class="ibox-content forum-container" style="background-color: #eee">
 
+        <div class="forum-title">
+            <div class="pull-right forum-desc">
+                <i class="fa fa-clock-o" th:text="${#temporals.format(topic.getDateOfCreation(), 'dd-MM-yyyy HH:mm')}">data
+                    powstania</i>
 
-        <!--        GENERALNIE TO MNIE INTERESUJE-->
-        <div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px">
-            <div class="col-sm-2 col-md-2 form-group border-between-rows">
             </div>
+            <h3 th:text="${topic.getTopic()}">Główny tytuł tematu</h3>
+        </div>
 
-            <div class="col-sm-8 col-md-8 form-group border-between-rows">
-                <div class="msg-wrap">
-                    <h1 class="thread-title">Forum</h1>
-
-                    <tr data-th-each="message : ${messages}">
-                        <div class="msg even">
-                            <div class="col-sm-3 col-md-3 form-group border-between-rows">
-                                <h5 class="media-heading" style="font-size: 16px" th:text="${message.getNameSender()}">
-                                    <small class="text-muted"></small>
-                                </h5>
-                                <small class="text-muted">
-                                    <i class="fa fa-clock-o" style="font-size: 14px" th:text="${message.getCreatedDate()}"></i>
-                                </small>
-
-                            </div>
-                            <div class="col-sm-8 col-md-8 form-group border-between-rows">
-                                <h3 th:text="${message.getText_msg()}"></h3>
-                            </div>
-
-
-                            <!--                        usuwanie -->
-                            <div class="col-sm-1 col-md-1 form-group border-between-rows" style="line-height: 100%">
-                                <div   th:if="${message.getId_sender()} == ${currentLoggedUserId}">
-                                    <form action="/deleteMessage" method="get">
-
-                                        <input type="hidden" th:value="${topicId}" name="topicId">
-                                        <input type="hidden" th:value="${message.getId()}" name="messageIdToDelete">
-                                        <button type="submit" style="font-size: 20px; line-height: 100%" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
-                        </div>
-
-
-
-
-                    </tr>
-
-
-
-
+        <div class="forum-item">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="forum-icon">
+                        <i class="fa fa-bolt"></i>
+                    </div>
+                    <a class="forum-item-title" th:text="${topic.getCreatorName()}">osoba tworząca post</a>
+                    <div class="forum-sub-title" th:text="${topic.getTopicFirstMsg()}"> wiadomość</div>
                 </div>
-
-                <div class="send-wrap "   th:classappend="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER') ? 'button-disable':''}">
-                    <h2> Odpowiedz</h2>
-
-                    <form accept-charset="UTF-8" th:action="@{/forum/forum-post-creator}" method="POST" role="form" class="">
-
-                        <input type="hidden" th:value="${topicId}" name="topicId">
-                        <div class="form-group">
-                            <textarea class="form-control counted" rows="3" name="message_text" placeholder="Tekst" style="font-size: 14px"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <h6 class="pull-right" id="counter"></h6>
-                            <button class="btn btn-info" type="submit">Wyślij</button>
-                        </div>
-                    </form>
+                <div class="col-md-1 forum-info"></div>
+                <div class="col-md-1 forum-info">
                 </div>
             </div>
         </div>
+
+
+        <div class="">
+            <div class="be-comment" data-th-each="message : ${forumMessages}">
+                <div class="be-comment-content">
+
+				<span class="be-comment-name">
+					<a th:text="${message.getNameSender()}"></a>
+					</span>
+                    <span class="be-comment-time">
+					<i class="fa fa-clock-o"
+                       th:text="${#temporals.format(message.getCreatedDate(), 'dd-MM-yyyy HH:mm')}"></i>
+				</span>
+
+                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+                    <span style="" class=" be-comment-text col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"
+                          th:text="${message.getText_msg()}">
+
+                    </span>
+                        <div th:if="${message.getId_sender()} == ${currentLoggedUserId}" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="display: flex;
+  justify-content: left;
+  align-items: center;">
+                            <form action="/deleteMessage" method="get">
+
+                                <!--                            <input type="hidden" th:value="${topicId}" name="topicId">-->
+                                <input type="hidden" th:value="${message.getId()}" name="messageId">
+                                <input type="hidden" th:value="${topic.getId()}" name="topicId">
+                                <button type="submit" style="font-size: 20px; line-height: 100%"
+                                        class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="send-wrap "
+             sec:authorize="isAuthenticated()">
+            <h2> Odpowiedz</h2>
+
+            <form accept-charset="UTF-8" th:action="@{/forum/forum-post-creator}" method="POST" role="form"
+                  class="">
+
+                <input type="hidden" th:value="${topic.getId()}" name="topicId">
+                <div class="form-group">
+                            <textarea class="form-control counted" rows="3" name="message_text" placeholder="Tekst"
+                                      style="font-size: 14px"></textarea>
+                </div>
+                <div class="form-group">
+                    <h6 class="pull-right" id="counter"></h6>
+                    <button class="btn btn-primary" type="submit">Wyślij</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
+</div>
 </div>
 
 </body>

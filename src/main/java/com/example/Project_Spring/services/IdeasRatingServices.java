@@ -17,14 +17,14 @@ public class IdeasRatingServices {
     IdeasRatingRepository ideasRatingRepository;
     SavingsIdeasServices savingsIdeasServices;
 
-    public IdeasRating findIdeaRatingByUserIdAndIdeaId (Integer userId, Long ideaId){
+    public IdeasRating findIdeaRatingByUserIdAndIdeaId (Long userId, Long ideaId){
 
 
         return ideasRatingRepository.findIdeasRatingByUserIdAndAndIdeaId(userId, ideaId);
     }
 
 
-    public IdeasRating updateOrSaveIdeaRating(Integer userId, Long ideaId, int rating ){
+    public IdeasRating updateOrSaveIdeaRating(Long userId, Long ideaId, int rating ){
 
         System.out.println("asdasdasdasd");
 //        System.out.println(userId + ideaId + rating);
@@ -42,7 +42,7 @@ public class IdeasRatingServices {
                 .orElse(null);
     }
 
-    public void SaveIdeaRating(Integer userId, Long ideaId, int rating ){
+    public void SaveIdeaRating(Long userId, Long ideaId, int rating ){
 
 
 

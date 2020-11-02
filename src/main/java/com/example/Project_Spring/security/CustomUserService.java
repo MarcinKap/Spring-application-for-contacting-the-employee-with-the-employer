@@ -9,9 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Transactional
@@ -40,18 +38,18 @@ public class CustomUserService implements UserDetailsService {
                 .ofNullable(userAppRepository.findUserAppByEmail(email))
                 .orElse(null);
     }
-    public UserApp findUserById(Integer id) {
+
+    public UserApp findUserById(Long id) {
         return Optional
                 .ofNullable(userAppRepository.findUserAppById(id))
                 .orElse(null);
     }
 
-    public String findUserEmailAdressById(Integer id){
+    public String findUserEmailAdressById(Long id) {
         return Optional
                 .ofNullable(userAppRepository.findUserAppById(id).getEmail())
                 .orElse(null);
     }
-
 
 
     public void saveUserApp(LoginUser loginUser) {
@@ -93,47 +91,57 @@ public class CustomUserService implements UserDetailsService {
                 .orElse(null);
     }
 
-    public String getLoggedUsersEmail (){
-        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+    public String getLoggedUsersEmail() {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserApp userApp = (UserApp) authentication.getPrincipal();
             UserApp currentUser = userAppRepository.findUserAppById(userApp.getId());
             String email = currentUser.getEmail();
             return email;
-        }
-        else{
+        } else {
             return null;
         }
     }
-    public String getLoggedUserName (){
-        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+
+    public String getLoggedUserName() {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserApp userApp = (UserApp) authentication.getPrincipal();
             UserApp currentUser = userAppRepository.findUserAppById(userApp.getId());
             String name = currentUser.getName();
             return name;
-        }
-        else{
+        } else {
             return null;
         }
     }
 
-    public Integer getLoggedUsersId (){
-        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+    public UserApp getLoggedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserApp userApp = (UserApp) authentication.getPrincipal();
+        UserApp currentUser = userAppRepository.findUserAppById(userApp.getId());
+
+        return currentUser;
+    }
+
+
+    public Long getLoggedUsersId() {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserApp userApp = (UserApp) authentication.getPrincipal();
             UserApp currentUser = userAppRepository.findUserAppById(userApp.getId());
-            Integer id = currentUser.getId();
+            Long id = currentUser.getId();
             return id;
-        }
-        else{
+        } else {
             return null;
         }
     }
 
+    public List<UserApp> getUserAppListById(Set<Long> idList) {
 
+        List<UserApp> userAppList = new ArrayList<>(userAppRepository.findUserAppsByIdIsIn(idList));
 
-
+        return userAppList;
+    }
 
 
 }

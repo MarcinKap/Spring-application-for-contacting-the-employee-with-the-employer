@@ -16,18 +16,9 @@ public class MessagesDto {
 
 
     private Long id;
-
-    private Long id_topic;
-
-
-    @Nullable
-    private Integer id_sender;
-    private String email_sender;
-    private Integer id_recipient;
-    private String text_msg;
-    private String topic;
-    private String nameSender;
-
+    private Long senderId;
+    private Long recipientId;
+    private String textMsg;
     private LocalDateTime createdDate;
 
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface IdeasRatingRepository extends JpaRepository<IdeasRating, Long> {
 
     @Query("select i from IdeasRating i where" + "(i.ideaId= ?2) AND  i.userId = ?1")
-    IdeasRating findIdeasRatingByUserIdAndAndIdeaId(Integer userId, Long ideaId);
+    IdeasRating findIdeasRatingByUserIdAndAndIdeaId(Long userId, Long ideaId);
 
 
     @Query("select avg(rating) from IdeasRating i where (i.ideaId= ?1)")

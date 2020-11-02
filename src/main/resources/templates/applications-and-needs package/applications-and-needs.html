@@ -9,21 +9,21 @@
 
     <!--Section: Contact v.2-->
     <section class="mb-4">
-
-        <!--Section heading-->
-        <h2 class="h1-responsive font-weight-bold text-center my-4">Masz pytanie? Napisz!</h2>
-        <!--Section description-->
-        <p class="text-center w-responsive mx-auto mb-5">Jeśli masz jakieś pytania, jesteśmy tu aby na nie
-            odpowiedzieć.</p>
-
+        <div class="wrapper wrapper-content animated fadeInRight page-title">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4">Masz pytanie? Napisz!</h2>
+            <!--Section description-->
+            <!--        <span class="text-center w-responsive mx-auto mb-5">Jeśli masz jakieś pytania, jesteśmy tu aby na nie-->
+            <!--            odpowiedzieć.</span>-->
+        </div>
         <div class="row">
 
             <!--Grid column-->
             <div class="col-md-9 mb-md-0 mb-5">
-                <form th:action="@{/sendMessage}"  method="POST">
+                <form th:action="@{/sendMessage}" method="POST">
 
                     <!--Grid row-->
-                    <div class="row"  th:if="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER')}">
+                    <div class="row" th:if="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER')}">
                         <!--Grid column-->
                         <div class="col-md-6">
                             <div class="md-form mb-0">
@@ -36,7 +36,8 @@
                         <div class="col-md-6">
                             <div class="md-form mb-0">
                                 <input type="text" id="email_sender" name="email_sender" class="form-control">
-                                <input type="number" id="id_recipient" placeholder="2" value="2"  name="id_recipient" hidden class="form-control">
+                                <input type="number" id="id_recipient" placeholder="2" value="2" name="id_recipient"
+                                       hidden class="form-control">
                                 <label class="">Twój email</label>
                             </div>
                         </div>
@@ -49,13 +50,14 @@
                     <div class="row" th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('USER')}">
                         <div class="col-md-6">
                             <div class="md-form mb-0">
-                                <input type="text" id="email_sender" th:value="${email_sender}" name="email_sender" hidden class="form-control">
-                                <input type="number" id="id_recipient" value="2" name="id_recipient" hidden class="form-control">
-<!--                                <label for="email" class="">Twój email</label>-->
+                                <input type="text" id="email_sender" th:value="${email_sender}" name="email_sender"
+                                       hidden class="form-control">
+                                <input type="number" id="id_recipient" value="2" name="id_recipient" hidden
+                                       class="form-control">
+                                <!--                                <label for="email" class="">Twój email</label>-->
                             </div>
                         </div>
                     </div>
-
 
 
                     <!--Grid row-->
@@ -88,7 +90,7 @@
                     <div class="form-row">
                         <div class="col-sm-12 col-md-12 form-group">
                             <button type="submit" class="btn btn-primary">
-                                <i  aria-hidden="true"></i>
+                                <i aria-hidden="true"></i>
                                 Wyślij
                             </button>
                         </div>

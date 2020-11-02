@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head th:replace="document/head :: head_section">
+
+
+</head>
+<body>
+<div th:replace="document/content :: content_section_title"></div>
+
+
+<div class="survey-page">
+
+    <!--Section: Contact v.2-->
+    <section class="mb-4">
+        <div class="wrapper wrapper-content animated fadeInRight page-title">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4" th:text="${news.get().title}"></h2>
+            <span th:text="${news.get().shortText}"></span>
+            <!--Section description-->
+            <!--        <span class="text-center w-responsive mx-auto mb-5">Jeśli masz jakieś pytania, jesteśmy tu aby na nie-->
+            <!--            odpowiedzieć.</span>-->
+        </div>
+        <div class="row">
+        </div>
+    </section>
+    <div class="separator"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="lead" th:text="${news.get().text}"></p>
+
+        </div>
+    </div>
+    <div class="row form-group" style="margin-top: 50px; margin-bottom: 10px">
+        <div class="col-sm-3 col-md-3 form-group border-between-rows">
+        </div>
+        <div class="col-sm-6 col-md-6 form-group border-between-rows">
+
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vlDzYIIOYmM"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 form-group border-between-rows">
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--&lt;!&ndash; Page content holder &ndash;&gt;-->
+<!--<div class="mb-4 survey-page" id="content">-->
+<!--    &lt;!&ndash; Toggle button &ndash;&gt;-->
+<!--    &lt;!&ndash; Demo content &ndash;&gt;-->
+<!--    <h2 class="display-4" th:text="${news.get().title}"></h2>-->
+<!--    <p class="lead mb-0" th:text="${news.get().shortText}"></p>-->
+
+<!--    <div class="row">-->
+<!--        <div class="col-lg-12">-->
+<!--            <p class="lead" th:text="${news.get().text}"></p>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row form-group" style="margin-top: 50px; margin-bottom: 10px">-->
+<!--        <div class="col-sm-3 col-md-3 form-group border-between-rows">-->
+<!--        </div>-->
+<!--        <div class="col-sm-6 col-md-6 form-group border-between-rows">-->
+
+<!--            <div class="embed-responsive embed-responsive-16by9">-->
+<!--                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vlDzYIIOYmM"-->
+<!--                        allowfullscreen></iframe>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-sm-3 col-md-3 form-group border-between-rows">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!-- End demo content -->
+
+
+</body>
+<footer th:replace="document/footer :: footer_section"></footer>
+</html>

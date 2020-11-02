@@ -19,23 +19,13 @@ public class Messages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long id_topic;
-
     @Nullable
-    private Integer id_sender;
+    private Long senderId;
     @Nullable
-    private String email_sender;
-
-    private Integer id_recipient;
-
-    private String text_msg;
-
-
-    private String topic;
-
+    private Long recipientId;
+    private String textMsg;
+    @Nullable
     private LocalDateTime createdDate;
-
-    private String nameSender;
 
 
 

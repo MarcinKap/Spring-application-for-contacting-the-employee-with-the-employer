@@ -3,150 +3,183 @@
 <head th:replace="document/head :: head_section">
 </head>
 <body>
+<!--<body >-->
 <div th:replace="document/content :: content_section_title"></div>
 
 <div class="account-page">
 
-    <div class="row col-sm-12 col-md-12 form-group">
-        <div class="col-sm-3 col-md-3 form-group border-between-rows">
-            <div th:replace="document/account-menu :: account_menu"></div>
-        </div>
-        <v class="col-sm-6 col-md-6 form-group">
-            <div class="title-font">
-                Wiadomości
-            </div>
-            <hr>
+    <div class="survey-page">
+        <div class="view-account">
+            <section class="module">
+                <div class="module-inner row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="padding-right: 0">
+                        <div th:replace="document/account-menu :: account_menu"></div>
+                    </div>
 
-            <h3 class=" text-center">Czat</h3>
-            <div class="messaging">
-                <div class="inbox_msg">
-                    <div class="inbox_people">
-                        <div class="headind_srch">
-                            <div class="recent_heading">
-                                <h4>Recent</h4>
-                            </div>
-                            <div class="srch_bar">
-                                <div class="stylish-input-group">
-                                    <input type="text" class="search-bar" placeholder="Search">
-                                    <span class="input-group-addon">
-                <button type="button">
-                    <i class="fa fa-search" aria-hidden="true"></i> </button>
-                </span></div>
-                            </div>
-                        </div>
+                    <div class="content-panel  col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                        <div class="">
+                            <!-- Content wrapper start -->
+                            <div class="content-wrapper">
 
-                        <!--                        //HISTORIA WSZYSTKICH WIADOMOSCI-->
+                                <!-- Row start -->
+                                <div class="row gutters">
 
-                        <div class="inbox_chat">
-                            <!--                        MOJ KOD-->
-                            <tr data-th-each="topic : ${topics}">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-                                <form action="/account-menu/account-private-messages" method="get">
-                                    <input type="hidden" th:value="${topic.getId()}" name="topicId">
-                                    <button style="width: 100%">
+                                        <div class="card m-0">
+
+                                            <!-- Row start -->
+                                            <div class="row no-gutters">
+                                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                                                    <div class="users-container">
+                                                        <div class="chat-search-box">
+                                                            <div class="input-group">
+                                                                <input class="form-control" placeholder="Search">
+                                                                <div class="input-group-btn">
+                                                                    <button type="button" class="btn btn-info">
+                                                                        <i class="fa fa-search"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <ul class="users">
+
+                                                            <li th:onclick="'javascript:updateMessagesList(\'' + ${user.getId()} + '\');'" th:each="user : ${users_list}" class="person" data-chat="person1">
+
+<!--                                                                <a th:href="@{'/account-menu/account-private-messages?friendId=' + ${user.getId()}}">-->
+                                                                <a >
 
 
-                                        <div class="chat_list active_chat"
-                                             th:if="${topic.getId()}== ${current_id_message} ">
-                                            <div class="chat_people">
-                                                <div class="chat_img"><img
-                                                        src="https://ptetutorials.com/images/user-profile.png"
-                                                        alt="sunil"></div>
-                                                <div class="chat_ib">
-                                                    <h5 th:text="${topic.getMailToDisplay()}"><span class="chat_date">Dec 25</span>
-                                                    </h5>
-                                                    <p th:text="${topic.topic}">
-                                                    </p>
+
+                                                                    <div class="user">
+                                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
+                                                                             alt="Retail Admin">
+                                                                        <span class="status busy"></span>
+                                                                    </div>
+                                                                    <p class="name-time">
+                                                                        <span class="name"
+                                                                              th:text="${user.getName() +' '+ user.getLastName() + ' ' + user.getEmail()}">Steve Bangalter</span>
+                                                                        <!--                                                                    <span class="time">15/02/2019</span>-->
+                                                                    </p>
+                                                                </a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <div id="showMessages" class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"
+                                                     style="background: #f4f5fb">
+<!--                                                    <div th:if="${param.friendId != null}">-->
+                                                    <div  th:if="${friend}!=null">
+                                                        <div class="selected-user">
+
+                                                            <span >To: <span
+                                                                    th:text="${friend.getName() + ' ' + friend.getLastName()}"
+                                                                    class="name"></span></span>
+                                                        </div>
+                                                        <div class="chat-container" >
+                                                            <ul  class="chat-box chatContainerScroll">
+                                                                <li th:each="message : ${messages}"
+                                                                    th:classappend="${message.getSenderId() == logged_user.getId()} ? 'chat-right' : 'chat-left'">
+                                                                    <div class="chat-avatar">
+                                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
+                                                                             alt="Retail Admin">
+                                                                        <div th:text="${message.getSenderId() == logged_user.getId()} ? ${logged_user.getName()} : ${friend.getName()} "
+                                                                             class="chat-name">Russell
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--/*@thymesVar id="getText_msg" type=""*/-->
+                                                                    <div th:text="${message.getTextMsg()}"
+                                                                         class="chat-text">
+                                                                        <!--                                                                        <br>How can I help you today?-->
+                                                                    </div>
+                                                                    <div th:text="${#temporals.format(message.getCreatedDate(), 'dd-MM-yyyy HH:mm')}"
+                                                                         class="chat-hour"><span
+                                                                            class="fa fa-check-circle"></span></div>
+                                                                </li>
+
+                                                                <!--                                                                <li class="chat-right">-->
+                                                                <!--                                                                    <div class="chat-hour">08:56 <span-->
+                                                                <!--                                                                            class="fa fa-check-circle"></span></div>-->
+                                                                <!--                                                                    <div class="chat-text">Hi, Russell-->
+                                                                <!--                                                                        <br> I need more information about Developer-->
+                                                                <!--                                                                        Plan.-->
+                                                                <!--                                                                    </div>-->
+                                                                <!--                                                                    <div class="chat-avatar">-->
+                                                                <!--                                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"-->
+                                                                <!--                                                                             alt="Retail Admin">-->
+                                                                <!--                                                                        <div class="chat-name">Sam</div>-->
+                                                                <!--                                                                    </div>-->
+                                                                <!--                                                                </li>-->
+
+                                                            </ul>
+
+
+                                                            <!--                                                        <div class="form-group mt-3 mb-0">-->
+                                                            <!--                                                            <textarea class="form-control" rows="3" placeholder="Type your message here..."></textarea>-->
+                                                            <!--                                                        </div>-->
+                                                            <div class="msb-reply  col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                <form th:action="@{/sendMessageToPrivateMessanger}"
+                                                                      class="row" method="POST">
+                                                                    <!--                                                                <textarea-->
+                                                                    <!--                                                                        placeholder="What's on your mind..."></textarea>-->
+
+                                                                    <textarea type="text" id="text_msg" name="text_msg"
+                                                                              rows="1"
+                                                                              class="form-control md-textarea  col-xl-11 col-lg-11 col-md-11 col-sm-9 col-9"></textarea>
+                                                                    <button class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                                                        <i class="fa fa-paper-plane-o"></i></button>
+
+                                                                    <input type="text" name="id_recipient"
+                                                                           th:value="${friend.getId()}" hidden/>
+
+
+                                                                    <!--                                    <input type="text" id="email_sender" th:value="${email_sender}" name="email_sender"-->
+                                                                    <!--                                           hidden>-->
+
+                                                                    <!--                                                                                                        <input type="text" name="topicID" th:value="${current_id_message}" hidden/>-->
+
+
+                                                                    <!--                                                                                                        <button type="submit" class="msg_send_btn"-->
+                                                                    <!--                                                                                                                th:classappend="${current_id_message == null ? 'button-disable':''}">-->
+
+                                                                    <!--                                                                                                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>-->
+                                                                    <!--                                                                                                        </button>-->
+
+                                                                </form>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
                                                 </div>
                                             </div>
+                                            <!-- Row end -->
                                         </div>
 
-
-                                        <div class="chat_list" th:if="${topic.getId()} != ${current_id_message} ">
-                                            <div class="chat_people">
-                                                <div class="chat_img"><img
-                                                        src="https://ptetutorials.com/images/user-profile.png"
-                                                        alt="sunil"></div>
-                                                <div class="chat_ib">
-                                                    <h5 th:text="${topic.getMailToDisplay()}"><span class="chat_date">Dec 25</span>
-                                                    </h5>
-                                                    <p th:text="${topic.topic}"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </form>
-
-                            </tr>
-
-                        </div>
-                        <!--                        //HISTORIA WIADOMOSCI PO PRAWEJ - KONIEC-->
-
-
-                        <!--                        //WIADOMOSCI WLASCIWE-->
-                    </div>
-                    <div class="mesgs">
-                        <div class="msg_history">
-
-                            <!--                            Informacje z bazy danych -->
-                            <tr data-th-each="sended_message : ${sended_messages}">
-
-
-                                <div th:if="${sended_message.id_sender} != ${logged_in_user_id}">
-                                    <div class="incoming_msg">
-                                        <div class="incoming_msg_img"><img
-                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
-                                        </div>
-                                        <div class="received_msg">
-                                            <div class="received_withd_msg">
-                                                <p th:text="${sended_message.text_msg}">
-
-                                                </p>
-                                                <span class="time_date"  th:text="${sended_message.getCreatedDate()}"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div th:if="${sended_message.id_sender} == ${logged_in_user_id} ">
-                                    <div class="outgoing_msg">
-                                        <div class="sent_msg">
-                                            <p th:text="${sended_message.text_msg}">
-                                            </p>
-                                            <span class="time_date" th:text="${sended_message.getCreatedDate()}"></span>
-                                        </div>
                                     </div>
 
                                 </div>
-                            </tr>
+                                <!-- Row end -->
 
-                        </div>
-                        <div class="type_msg">
-                            <div class="input_msg_write">
-
-
-                                <form th:action="@{/sendMessageToPrivateMessanger}" method="POST">
-                                    <input type="text" id="email_sender" th:value="${email_sender}" name="email_sender"
-                                           hidden>
-                                    <input type="text" name="id_recipient" th:value="${logged_in_user_id}" hidden/>
-                                    <input type="text" name="topicID" th:value="${current_id_message}" hidden/>
-                                    <input type="text" name="text_msg" class="write_msg" placeholder="Type a message"/>
-
-                                    <button type="submit" class="msg_send_btn"
-                                            th:classappend="${current_id_message == null ? 'button-disable':''}">
-
-                                        <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                                    </button>
-
-                                </form>
                             </div>
+                            <!-- Content wrapper end -->
+
                         </div>
                     </div>
+
+
                 </div>
-
-            </div>
-        </v>
+            </section>
+        </div>
     </div>
+
+
+
 </div>
 
 

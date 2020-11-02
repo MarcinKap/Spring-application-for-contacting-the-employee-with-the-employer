@@ -18,7 +18,7 @@ public class IdeasRating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer userId;
+    private Long userId;
     private Long ideaId;
     private int rating;
 

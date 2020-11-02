@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <meta charset="UTF-8">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>-->
+<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 
 
 <head th:replace="document/head :: head_section"></head>
@@ -12,74 +11,81 @@
 
 <div th:replace="document/content :: content_section_title"></div>
 
-<div class="" style="margin-top: 50px">
-    <div class="row">
+<!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">-->
+<!--<div class="container">-->
 
-        <hr/>
-        <div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px">
-            <div class="col-sm-2 col-md-2 form-group border-between-rows" style="height: 100%; width: 100%">
+<div class="survey-page">
+    <!--        <div class="col-lg-12">-->
+
+    <section class="mb-4">
+        <div class="wrapper wrapper-content animated fadeInRight page-title">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4">Forum</h2>
+            <!--Section description-->
+            <!--        <span class="text-center w-responsive mx-auto mb-5">Jeśli masz jakieś pytania, jesteśmy tu aby na nie-->
+            <!--            odpowiedzieć.</span>-->
+        </div>
+        <div class="row">
+        </div>
+    </section>
+
+    <div class="ibox-content forum-container" style="background-color: #eee">
+
+        <div class="forum-title">
+            <div class="pull-right forum-desc">
+                <samll th:text="'Wszystkie posty: '+ ${all_posts}"></samll>
             </div>
-            <div class="col-sm-8 col-md-8 form-group border-between-rows" style="height: 100%; width: 100%">
-                <div class="msg-wrap" style="display: block">
-                    <h1 class="thread-title">Forum</h1>
-                    <div data-th-each="thread : ${threads}">
-                        <div class="msg even" style="height: 100%">
-                            <div class="col-sm-3 col-md-3 form-group border-between-rows author">
-                                <h5 class="media-heading" style="font-size: 16px" th:text="${thread.creatorName}">
-                                    <small class="text-muted"></small>
-                                </h5>
-                                <small class="text-muted">
-                                    <i class="fa fa-clock-o" style="font-size: 14px"
-                                       th:text="${thread.getDateOfCreation()}"></i>
-                                </small>
-                            </div>
-                            <div class="col-sm-8 col-md-8 form-group border-between-rows">
-                                <form action="/forum/forum-thread" method="get">
-                                    <input type="hidden" th:value="${thread.getId()}" name="topicId">
-                                    <button style="padding: 0; border: none; background: none; text-align: left">
-                                        <h2 th:text="${thread.topic}"></h2>
-                                        <h3 th:text="${thread.getTopicFirstMsg()}"></h3>
+            <h3>Tematy</h3>
+        </div>
 
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-sm-1 col-md-1 form-group border-between-rows  space-height-100">
-                                <div th:if="${thread.getId_sender()} == ${currentLoggedUserId}">
-                                    <form action="/deleteThread" method="get">
-                                        <input type="hidden" th:value="${thread.getId()}" name="threadIdToDelete">
-                                        <button type="submit" style="font-size: 20px; line-height: 100%"
-                                                class="btn btn-danger btn-sm"><i class="fa fa-trash"
-                                                                                 aria-hidden="true"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
-                        </div>
+        <div class="forum-item" data-th-each="thread : ${threads}">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="forum-icon">
+                        <i class="fa fa-bolt"></i>
                     </div>
+                    <a th:href="@{'/forum/forum-thread?topicId=' + ${thread.getId()}}" class="forum-item-title"
+                       th:text="${thread.topic}"></a>
+                    <div class="forum-sub-title" th:text="${thread.getTopicFirstMsg()}"></div>
                 </div>
-                <div class="send-wrap "
-                     th:classappend="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER') ? 'button-disable':''}">
-                    <h2> Tworzenie nowego tematu </h2>
-                    <form accept-charset="UTF-8" th:action="@{/forum/forum-thread-creator}" method="POST" role="form"
-                          class="">
-                        <div class="form-group">
+                <div class="col-md-1 forum-info"></div>
+                <div class="col-md-1 forum-info">
+                </div>
+                <div class="col-md-1 forum-info">
+                            <span class="views-number" th:text="${thread.getNumberOfForumMessages()}">
 
-                            <textarea class="form-control counted" name="thread" rows="1" placeholder="Temat"
-                                      style="font-size: 14px"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control counted" rows="3" name="thread_text" placeholder="Tekst"
-                                      style="font-size: 14px"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <h6 class="pull-right" id="counter"></h6>
-                            <button class="btn btn-info" type="submit">Send</button>
-                        </div>
-                    </form>
+                            </span>
+                    <div>
+                        <small>Posts</small>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+        <div sec:authorize="isAuthenticated()" class="send-wrap "
+             th:classappend="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER') ? 'button-disable':''}">
+            <h2> Tworzenie nowego tematu </h2>
+            <form accept-charset="UTF-8" th:action="@{/forum/forum-thread-creator}" method="POST" role="form"
+                  class="">
+                <div class="form-group">
+
+                            <textarea class="form-control counted" name="thread" rows="1" placeholder="Temat"
+                                      style="font-size: 14px"></textarea>
+                </div>
+                <div class="form-group">
+                            <textarea class="form-control counted" rows="3" name="thread_text" placeholder="Tekst"
+                                      style="font-size: 14px"></textarea>
+                </div>
+                <div class="form-group">
+                    <h6 class="" id="counter"></h6>
+                    <button class="btn btn-primary" type="submit">Wyślij</button>
+                </div>
+            </form>
+        </div>
+
+
     </div>
 </div>
 

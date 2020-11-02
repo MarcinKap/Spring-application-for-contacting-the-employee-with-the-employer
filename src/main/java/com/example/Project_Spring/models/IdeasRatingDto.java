@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class IdeasRatingDto {
 
     private Long id;
-    private Integer userId;
+    private Long userId;
     private Long ideaId;
     private int rating;
 }

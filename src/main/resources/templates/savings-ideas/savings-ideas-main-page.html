@@ -120,23 +120,23 @@
                                             <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
                                                 <input type="radio" th:id="${'star5id'+s.getId()}"
                                                        th:name="${s.getId()}" value="5"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=5&id='+ this.name); updateEventCount()"/><label
+                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=5&id='+ this.name); updateReadedParamById()"/><label
                                                     th:for="${'star5id'+s.getId()}" title="5 star">5</label>
                                                 <input type="radio" th:id="${'star4id'+s.getId()}"
                                                        th:name="${s.getId()}" value="4"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=4&id='+ this.name); updateEventCount()"/><label
+                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=4&id='+ this.name); updateReadedParamById()"/><label
                                                     th:for="${'star4id'+s.getId()}" title="4 star">4</label>
                                                 <input type="radio" th:id="${'star3id'+s.getId()}"
                                                        th:name="${s.getId()}" value="3"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=3&id='+ this.name); updateEventCount()"/><label
+                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=3&id='+ this.name); updateReadedParamById()"/><label
                                                     th:for="${'star3id'+s.getId()}" title="3 star">3</label>
                                                 <input type="radio" th:id="${'star2id'+s.getId()}"
                                                        th:name="${s.getId()}" value="2"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=2&id='+ this.name); updateEventCount()"/><label
+                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=2&id='+ this.name); updateReadedParamById()"/><label
                                                     th:for="${'star2id'+s.getId()}" title="2 star">2</label>
                                                 <input type="radio" th:id="${'star1id'+s.getId()}"
                                                        th:name="${s.getId()}" value="1"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=1&id='+ this.name); updateEventCount()"/><label
+                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=1&id='+ this.name); updateReadedParamById()"/><label
                                                     th:for="${'star1id'+s.getId()}" title="1 star">1</label>
                                             </div>
                                             <div th:if="${s.getAverageRating()}!= null" style="text-align: center">

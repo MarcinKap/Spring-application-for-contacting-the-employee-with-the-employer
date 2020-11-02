@@ -23,7 +23,7 @@ public class UserApp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "user_id")
-    private Integer id;
+    private Long id;
 //    @Email
     private String email;
     private String password;
