@@ -68,20 +68,22 @@
                                                     </div>
                                                 </div>
 
-                                                <div id="showMessages" class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"
+                                                <div id="showMessages"  class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"
                                                      style="background: #f4f5fb">
 <!--                                                    <div th:if="${param.friendId != null}">-->
-                                                    <div  th:if="${friend}!=null">
-                                                        <div class="selected-user">
+                                                    <div  >
+                                                        <div th:if="${friend}!=null" class="selected-user">
 
                                                             <span >To: <span
                                                                     th:text="${friend.getName() + ' ' + friend.getLastName()}"
                                                                     class="name"></span></span>
                                                         </div>
-                                                        <div class="chat-container" >
-                                                            <ul  class="chat-box chatContainerScroll">
+                                                        <div  class="chat-container" th:if="${friend}!=null">
+                                                            <ul id="updateMessages"  class="chat-box chatContainerScroll">
                                                                 <li th:each="message : ${messages}"
                                                                     th:classappend="${message.getSenderId() == logged_user.getId()} ? 'chat-right' : 'chat-left'">
+
+
                                                                     <div class="chat-avatar">
                                                                         <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
                                                                              alt="Retail Admin">

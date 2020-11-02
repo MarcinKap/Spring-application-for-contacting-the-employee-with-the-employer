@@ -82,8 +82,6 @@ public class MessagesController {
 //        model.addAttribute("messages", messagesService.getMessagesBySenderAndReceipientId(friendId, currentLoggedUserId));
 
         System.out.println(friendId + " frinedId");
-
-
         Long currentLoggedUserId = customUserService.getLoggedUsersId();
 
         //LiSTA UŻYTYKOWNIKÓW DO KTÓRYCH MOŻNA NAPISAĆ
@@ -93,9 +91,6 @@ public class MessagesController {
         List<UserApp> userAppList = customUserService.getUserAppListById(messagesUsersId);
         //Użytkownicy do których można napisać
         model.addAttribute("users_list", userAppList);
-
-
-
         model.addAttribute("messages", messagesService.getMessagesBySenderAndReceipientId(friendId, currentLoggedUserId));
         model.addAttribute("friend", customUserService.findUserById(friendId));
         model.addAttribute("logged_user", customUserService.findUserById(currentLoggedUserId));
@@ -103,6 +98,31 @@ public class MessagesController {
 
         return "/account-menu/account-private-messages :: #showMessages";
     }
+    @GetMapping(value = "/update-messages")
+    public String getUpdateMessages(Model model, @org.springframework.lang.Nullable  @RequestParam("friendId") Long friendId) {
+//        Long currentLoggedUserId = customUserService.getLoggedUsersId();
+//        model.addAttribute("messages", messagesService.getMessagesBySenderAndReceipientId(friendId, currentLoggedUserId));
+
+        System.out.println(friendId + " frinedId");
+        Long currentLoggedUserId = customUserService.getLoggedUsersId();
+
+        //LiSTA UŻYTYKOWNIKÓW DO KTÓRYCH MOŻNA NAPISAĆ
+        //Szukanie wszystkich id ludzi z którym aktualny użytkownik miał kontakt
+        Set<Long> messagesUsersId = messagesService.getUniqueIdRecipientAndSender(currentLoggedUserId);
+//      Szukanie wszystkich użytkowników po id - tych z którymi miał kontakt obecnie zalogowany użytkownik
+        List<UserApp> userAppList = customUserService.getUserAppListById(messagesUsersId);
+        //Użytkownicy do których można napisać
+        model.addAttribute("users_list", userAppList);
+        model.addAttribute("messages", messagesService.getMessagesBySenderAndReceipientId(friendId, currentLoggedUserId));
+        model.addAttribute("friend", customUserService.findUserById(friendId));
+        model.addAttribute("logged_user", customUserService.findUserById(currentLoggedUserId));
+        model.addAttribute("email_sender", customUserService.getLoggedUsersEmail());
+
+        return "/account-menu/account-private-messages :: #updateMessages";
+    }
+
+
+
 
     @PostMapping("/sendMessageToPrivateMessanger")
     public String addMessageToPrivateMessanger(Model model,

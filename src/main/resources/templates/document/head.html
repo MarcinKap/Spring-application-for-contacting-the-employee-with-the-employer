@@ -158,19 +158,30 @@
             });
         }
 
-        
+
         function updateMessagesList(param) {
-            setInterval(upd(param), 1000);
+            $.ajax({
+                url: showMessages(param),
+                success: function () {
+                    setInterval(function() { updateMessages(param); }, 1000);
+                }
+            })
+            // updateMessages(param);
+            // // setInterval(function() { updateMessages(param); }, 1000);
+
+
         }
 
-        function upd(param) {
+        function showMessages(param) {
             $.get("show-messages", {friendId: param}).done(function (fragment) { // get from controller
                 $("#showMessages").replaceWith(fragment); // update snippet of page
             });
-
-            // setTimeout(updateMessagesList(param), 5000)
         }
-
+        function updateMessages(param) {
+            $.get("update-messages", {friendId: param}).done(function (fragment) { // get from controller
+                $("#updateMessages").replaceWith(fragment); // update snippet of page
+            });
+        }
 
 
 
