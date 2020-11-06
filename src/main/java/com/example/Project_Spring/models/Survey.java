@@ -24,7 +24,7 @@ public class Survey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nazwa_ankiety;
+    private String title;
 
 
 
@@ -40,7 +40,7 @@ public class Survey {
 //    public Survey(Survey survey) {
 //        this.id = survey.getId();
 //        this.lista = survey.getLista();
-//        this.nazwa_ankiety = survey.getNazwa_ankiety();
+//        this.title = survey.getTitle();
 //
 //    }
 

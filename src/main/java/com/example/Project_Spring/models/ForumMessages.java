@@ -19,16 +19,16 @@ public class ForumMessages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long id_topic;
+    private Long topicId;
 
     @Nullable
-    private Long id_sender;
+    private Long senderId;
     @Nullable
-    private String email_sender;
+    private String senderEmail;
 
-    private Long id_recipient;
+    private Long recipientId;
 
-    private String text_msg;
+    private String textMsg;
 
 
     private String topic;

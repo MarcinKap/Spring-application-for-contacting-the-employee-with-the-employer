@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <head th:replace="document/head :: head_section">
@@ -10,134 +10,146 @@
 <body>
 <div th:replace="document/content :: content_section_title"></div>
 
+<div class="survey-page">
+    <section class="mb-4">
+        <div class="wrapper wrapper-content animated fadeInRight page-title">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4 ">Pomysły oszczędności</h2>
+        </div>
+        <div class="row">
+        </div>
+    </section>
 
-<div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px; margin-bottom: 10px">
-    <div class="col-sm-3 col-md-3 form-group border-between-rows">
-    </div>
+    <div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px; margin-bottom: 10px">
+        <div class="col-sm-2 col-md-2 form-group border-between-rows">
+        </div>
 
-    <!--<div class="container mt-5 mb-5 ">-->
-    <div class="col-sm-6 col-md-6 form-group border-between-rows">
+        <!--<div class="container mt-5 mb-5 ">-->
+        <div class="col-sm-8 col-md-8 form-group border-between-rows">
 
 
-        <!------ Include the above in your HEAD tag ---------->
-        <a href="/savings-ideas/savings-ideas-form" class="btn btn-primary" style="margin-bottom: 5px" >Stwórz nowy wniosek</a>
+            <!------ Include the above in your HEAD tag ---------->
+            <a href="/savings-ideas/savings-ideas-form" class="btn btn-primary" style="margin-bottom: 5px">Stwórz nowy
+                wniosek</a>
 
-        <div th:fragment="entity-row" th:each="s : ${savingIdeasList}">
-            <div class="panel-group" id="accordion">
+            <div th:fragment="entity-row" th:each="s : ${savingIdeasList}">
+                <div class="panel-group" id="accordion">
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="form-sec panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" th:href="${'#'+s.getId()}">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="form-sec panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" th:href="${'#'+s.getId()}">
                             <span
                                     class=" glyphicon glyphicon-folder-close">
                             </span>
-                                <div th:text="${s.idea_subject}"></div>
-                            </a>
-                        </h4>
-                    </div>
-                    <div th:id="${s.getId()}" class="panel-collapse collapse in">
-                        <div class="panel-body" style="margin-left: 50px">
-                            <table class="table ">
+                                    <div th:text="${s.getIdeaSubject()}"></div>
+                                </a>
+                            </h4>
+                        </div>
+                        <div th:id="${s.getId()}" class="panel-collapse collapse in">
+                            <div class="panel-body" style="margin-left: 50px">
+                                <table class="table ">
 
-                                <!--                            OPIS-->
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                        <h5>OPIS</h5>
-                                        <div th:text="${s.description}"></div>
-                                    </td>
-                                </tr>
+                                    <!--                            OPIS-->
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                            <h5>OPIS</h5>
+                                            <div th:text="${s.getDescription()}"></div>
+                                        </td>
+                                    </tr>
 
-                                <!--KORZYSCI-->
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                        <h5>Korzyści</h5>
-                                        <div th:text="${s.natureOfTheBenefit}"></div>
-                                    </td>
-                                </tr>
+                                    <!--KORZYSCI-->
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                            <h5>Korzyści</h5>
+                                            <div th:text="${s.getNatureOfTheBenefit()}"></div>
+                                        </td>
+                                    </tr>
 
-                                <!--OPLACALNOSC W JEDNOSTCE-->
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                        <h5>OPŁACALNOŚĆ</h5>
-                                        <div th:text="${s.profitability}"></div>
-                                        <div th:text="${s.unit}"></div>
-                                    </td>
-                                </tr>
+                                    <!--OPLACALNOSC W JEDNOSTCE-->
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                            <h5>OPŁACALNOŚĆ</h5>
+                                            <div th:text="${s.getProfitability()}"></div>
+                                            <div th:text="${s.getUnit()}"></div>
+                                        </td>
+                                    </tr>
 
-                                <!--                            KATEGORIA-->
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                        <h5>KATEGORIA</h5>
-                                        <div th:text="${s.getSavingsIdeasCategories().getCategoryName()}"></div>
-                                    </td>
-                                </tr>
-
-
-                                <!--                           Charakter-->
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                        <h5>CHARAKTER</h5>
-                                        <div th:text="${s.natureOfTheBenefit}"></div>
-                                    </td>
-                                </tr>
-
-                                <!--                            Obszar-->
-                                <tr>
-                                    <td>
-
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                        <h5>OBSZAR</h5>
-                                        <div th:text="${s.workAreas.name}"></div>
-                                    </td>
-                                </tr>
-
-                                <!--                            Rodzaj kosztow-->
-                                <!--                                <tr>-->
-                                <!--                                    <td>-->
-                                <!--                                        <span class="glyphicon glyphicon-pencil text-primary"></span>-->
-
-                                <!--                                        TUTAJ BEDA RODZAJE KOSZTOW-->
-                                <!--&lt;!&ndash;                                        <div th:each="t : ${s.getTypeOfCosts()}">&ndash;&gt;-->
-                                <!--&lt;!&ndash;                                            <div th:text="${t.name}"></div>&ndash;&gt;-->
-                                <!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
-
-                                <!--                                    </td>-->
-                                <!--                                </tr>-->
+                                    <!--                            KATEGORIA-->
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                            <h5>KATEGORIA</h5>
+                                            <div th:text="${s.getSavingsIdeasCategories().getCategoryName()}"></div>
+                                        </td>
+                                    </tr>
 
 
-                                <!--                                RATING-->
-                                <tr>
-                                    <td style="background-color: #f2f2f2">
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                        <h5 style="text-align: center">Jak oceniasz ten pomysł?</h5>
-                                        <div class="container">
-                                            <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
-                                                <input type="radio" th:id="${'star5id'+s.getId()}"
-                                                       th:name="${s.getId()}" value="5"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=5&id='+ this.name); updateReadedParamById()"/><label
-                                                    th:for="${'star5id'+s.getId()}" title="5 star">5</label>
-                                                <input type="radio" th:id="${'star4id'+s.getId()}"
-                                                       th:name="${s.getId()}" value="4"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=4&id='+ this.name); updateReadedParamById()"/><label
-                                                    th:for="${'star4id'+s.getId()}" title="4 star">4</label>
-                                                <input type="radio" th:id="${'star3id'+s.getId()}"
-                                                       th:name="${s.getId()}" value="3"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=3&id='+ this.name); updateReadedParamById()"/><label
-                                                    th:for="${'star3id'+s.getId()}" title="3 star">3</label>
-                                                <input type="radio" th:id="${'star2id'+s.getId()}"
-                                                       th:name="${s.getId()}" value="2"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=2&id='+ this.name); updateReadedParamById()"/><label
-                                                    th:for="${'star2id'+s.getId()}" title="2 star">2</label>
-                                                <input type="radio" th:id="${'star1id'+s.getId()}"
-                                                       th:name="${s.getId()}" value="1"
-                                                       onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=1&id='+ this.name); updateReadedParamById()"/><label
-                                                    th:for="${'star1id'+s.getId()}" title="1 star">1</label>
+                                    <!--                           Charakter-->
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                            <h5>CHARAKTER</h5>
+                                            <div th:text="${s.natureOfTheBenefit}"></div>
+                                        </td>
+                                    </tr>
+
+                                    <!--                            Obszar-->
+                                    <tr>
+                                        <td>
+
+                                            <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                            <h5>OBSZAR</h5>
+                                            <div th:text="${s.workAreas.name}"></div>
+                                        </td>
+                                    </tr>
+
+                                    <!--                            Rodzaj kosztow-->
+                                    <!--                                <tr>-->
+                                    <!--                                    <td>-->
+                                    <!--                                        <span class="glyphicon glyphicon-pencil text-primary"></span>-->
+
+                                    <!--                                        TUTAJ BEDA RODZAJE KOSZTOW-->
+                                    <!--&lt;!&ndash;                                        <div th:each="t : ${s.getTypeOfCosts()}">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;                                            <div th:text="${t.title}"></div>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+
+                                    <!--                                    </td>-->
+                                    <!--                                </tr>-->
+
+
+                                    <!--                                RATING-->
+                                    <tr >
+                                        <td style="background-color: #f2f2f2" >
+                                            <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                            <h5 style="text-align: center">Jak oceniasz ten pomysł?</h5>
+                                            <div sec:authorize="isAuthenticated()" class="container">
+                                                <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                                                    <input type="radio" th:id="${'star5id'+s.getId()}"
+                                                           th:name="${s.getId()}" value="5"
+                                                           onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=5&id='+ this.name); updateReadedParamById()"/><label
+                                                        th:for="${'star5id'+s.getId()}" title="5 star">5</label>
+                                                    <input type="radio" th:id="${'star4id'+s.getId()}"
+                                                           th:name="${s.getId()}" value="4"
+                                                           onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=4&id='+ this.name); updateReadedParamById()"/><label
+                                                        th:for="${'star4id'+s.getId()}" title="4 star">4</label>
+                                                    <input type="radio" th:id="${'star3id'+s.getId()}"
+                                                           th:name="${s.getId()}" value="3"
+                                                           onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=3&id='+ this.name); updateReadedParamById()"/><label
+                                                        th:for="${'star3id'+s.getId()}" title="3 star">3</label>
+                                                    <input type="radio" th:id="${'star2id'+s.getId()}"
+                                                           th:name="${s.getId()}" value="2"
+                                                           onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=2&id='+ this.name); updateReadedParamById()"/><label
+                                                        th:for="${'star2id'+s.getId()}" title="2 star">2</label>
+                                                    <input type="radio" th:id="${'star1id'+s.getId()}"
+                                                           th:name="${s.getId()}" value="1"
+                                                           onclick="$.post('savings-ideas/savings-ideas-main-page/saveRating?value=1&id='+ this.name); updateReadedParamById()"/><label
+                                                        th:for="${'star1id'+s.getId()}" title="1 star">1</label>
+                                                </div>
+
                                             </div>
                                             <div th:if="${s.getAverageRating()}!= null" style="text-align: center">
                                                 Średnia ocen tego pomysłu to:
@@ -146,30 +158,24 @@
                                                       th:text="${#numbers.formatDecimal(s.getAverageRating(), 0, 'COMMA', 2, 'POINT')}"
                                                       th:id="${'srednia z id:'+s.getId()}"></span>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!--                                koniec ratingu-->
+                                        </td>
+                                    </tr>
+                                    <!--                                koniec ratingu-->
 
 
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </br>
+
+
         </div>
-        </br>
-
-
-
 
 
     </div>
-
-    <div class="col-sm-3 col-md-3 form-group border-between-rows">
-
-    </div>
-
 </div>
 
 <footer th:replace="document/footer :: footer_section"></footer>

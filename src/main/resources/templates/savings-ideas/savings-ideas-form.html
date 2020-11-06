@@ -10,23 +10,34 @@
 <body>
 <div th:replace="document/content :: content_section_title"></div>
 
+<div class="survey-page">
+
+    <!--Section: Contact v.2-->
+    <section class="mb-4">
+        <div class="wrapper wrapper-content animated fadeInRight page-title">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4 ">Pomysły oszczędności</h2>
+        </div>
+        <div class="row">
+        </div>
+    </section>
 
 <div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px; margin-bottom: 10px">
-    <div class="col-sm-3 col-md-3 form-group border-between-rows">
+    <div class="col-sm-2 col-md-2 form-group border-between-rows">
     </div>
 
-    <div class="col-sm-6 col-md-6 form-group border-between-rows">
+    <div class="col-sm-8 col-md-8 form-group border-between-rows">
 
         <!--<div class="container mt-5 mb-5 ">-->
         <div class="form-sec">
-            <h4>Twój pomysł</h4>
+            <h4>Tworzenie pomysłów oszczędności</h4>
 
             <form th:object="${savingIdea}" th:action="@{/addSavingsIdea}" name="qryform" id="qryform" method="post"
                   onsubmit="return(validate());"
                   novalidate="novalidate">
                 <div class="form-group">
                     <label>Pomysł/Idee:</label>
-                    <input type="text" th:field="*{idea_subject}" class="form-control" id="idea_subject"
+                    <input required type="text" th:field="*{ideaSubject}" class="form-control" id="idea_subject"
                            placeholder="Pomysł/Idee" name="pomysl">
                 </div>
                 <!--                    <div class="form-group">-->
@@ -95,7 +106,7 @@
 
 <!--                    <div th:each="typesofCost : ${typesofCosts}" class="funkyradio funkyradio-primary">-->
 <!--                        <input type="checkbox" th:id="${typesofCost.getId()}">-->
-<!--                        <label th:for="${typesofCost.getId()}" th:text="${typesofCost.getName()}"></label>-->
+<!--                        <label th:for="${typesofCost.getId()}" th:text="${typesofCost.getTitle()}"></label>-->
 <!--                    </div>-->
 
                     <ul class="list-group">
@@ -125,7 +136,7 @@
 
     </div>
 
-</div>
+</div></div>
 
 <footer th:replace="document/footer :: footer_section"></footer>
 </body>

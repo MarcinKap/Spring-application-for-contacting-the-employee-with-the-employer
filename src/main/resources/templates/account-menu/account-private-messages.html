@@ -91,7 +91,7 @@
                                                                              class="chat-name">Russell
                                                                         </div>
                                                                     </div>
-                                                                    <!--/*@thymesVar id="getText_msg" type=""*/-->
+                                                                    <!--/*@thymesVar id="getTextMsg" type=""*/-->
                                                                     <div th:text="${message.getTextMsg()}"
                                                                          class="chat-text">
                                                                         <!--                                                                        <br>How can I help you today?-->
@@ -111,7 +111,7 @@
                                                                 <!--                                                                    <div class="chat-avatar">-->
                                                                 <!--                                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"-->
                                                                 <!--                                                                             alt="Retail Admin">-->
-                                                                <!--                                                                        <div class="chat-name">Sam</div>-->
+                                                                <!--                                                                        <div class="chat-title">Sam</div>-->
                                                                 <!--                                                                    </div>-->
                                                                 <!--                                                                </li>-->
 
@@ -122,25 +122,27 @@
                                                             <!--                                                            <textarea class="form-control" rows="3" placeholder="Type your message here..."></textarea>-->
                                                             <!--                                                        </div>-->
                                                             <div class="msb-reply  col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                                <form th:action="@{/sendMessageToPrivateMessanger}"
-                                                                      class="row" method="POST">
+<!--                                                                th:action="@{/sendMessageToPrivateMessanger}" method="POST"-->
+                                                                <div
+                                                                      class="row" >
                                                                     <!--                                                                <textarea-->
                                                                     <!--                                                                        placeholder="What's on your mind..."></textarea>-->
 
                                                                     <textarea type="text" id="text_msg" name="text_msg"
                                                                               rows="1"
                                                                               class="form-control md-textarea  col-xl-11 col-lg-11 col-md-11 col-sm-9 col-9"></textarea>
-                                                                    <button class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                                                    <button th:onclick="'javascript:sendPrivateMessage(\'' + ${friend.getId()} + '\');'"
+                                                                            class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
                                                                         <i class="fa fa-paper-plane-o"></i></button>
 
                                                                     <input type="text" name="id_recipient"
                                                                            th:value="${friend.getId()}" hidden/>
 
 
-                                                                    <!--                                    <input type="text" id="email_sender" th:value="${email_sender}" name="email_sender"-->
+                                                                    <!--                                    <input type="text" id="senderEmail" th:value="${senderEmail}" title="senderEmail"-->
                                                                     <!--                                           hidden>-->
 
-                                                                    <!--                                                                                                        <input type="text" name="topicID" th:value="${current_id_message}" hidden/>-->
+                                                                    <!--                                                                                                        <input type="text" title="topicID" th:value="${current_id_message}" hidden/>-->
 
 
                                                                     <!--                                                                                                        <button type="submit" class="msg_send_btn"-->
@@ -149,7 +151,7 @@
                                                                     <!--                                                                                                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>-->
                                                                     <!--                                                                                                        </button>-->
 
-                                                                </form>
+                                                                </div>
 
 
                                                             </div>

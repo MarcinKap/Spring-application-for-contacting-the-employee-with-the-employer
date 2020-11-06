@@ -4,6 +4,7 @@ import com.example.Project_Spring.mappers.MessagesMapper;
 import com.example.Project_Spring.mappers.TopicMapper;
 import com.example.Project_Spring.models.Messages;
 import com.example.Project_Spring.models.MessagesDto;
+import com.example.Project_Spring.models.ServiceResponse;
 import com.example.Project_Spring.models.TopicDto;
 import com.example.Project_Spring.security.CustomUserService;
 import com.example.Project_Spring.security.UserApp;
@@ -11,6 +12,8 @@ import com.example.Project_Spring.security.UserAppRepository;
 import com.example.Project_Spring.services.MessagesService;
 import com.example.Project_Spring.services.TopicServices;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -75,7 +78,7 @@ public class MessagesController {
         return "account-menu/account-private-messages";
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping(value = "/show-messages")
     public String getEventCount(Model model, @org.springframework.lang.Nullable  @RequestParam("friendId") Long friendId) {
 //        Long currentLoggedUserId = customUserService.getLoggedUsersId();
@@ -98,6 +101,9 @@ public class MessagesController {
 
         return "/account-menu/account-private-messages :: #showMessages";
     }
+
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping(value = "/update-messages")
     public String getUpdateMessages(Model model, @org.springframework.lang.Nullable  @RequestParam("friendId") Long friendId) {
 //        Long currentLoggedUserId = customUserService.getLoggedUsersId();
@@ -123,11 +129,11 @@ public class MessagesController {
 
 
 
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/sendMessageToPrivateMessanger")
     public String addMessageToPrivateMessanger(Model model,
-                                               @RequestParam(value = "id_recipient") Long recipientId,
-                                               @RequestParam(value = "text_msg") String text_msg
+                                               @RequestParam(value = "recipientId") Long recipientId,
+                                               @RequestParam(value = "textMsg") String text_msg
                                                ) {
         Long senderId = customUserService.getLoggedUsersId();
         MessagesDto messagesDto = MessagesDto.builder()
@@ -142,5 +148,33 @@ public class MessagesController {
 
         return "redirect:/account-menu/account-private-messages?friendId=" + recipientId;
     }
+
+
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PostMapping("/saveMessage")
+    public ResponseEntity<Object> addPrivateMessage(@RequestParam(value = "recipientId") Long recipientId,
+                                                    @RequestParam(value = "textMsg") String text_msg){
+
+
+        Long senderId = customUserService.getLoggedUsersId();
+        MessagesDto messagesDto = MessagesDto.builder()
+                .senderId(senderId)
+                .recipientId(recipientId)
+                .textMsg(text_msg)
+                .createdDate(LocalDateTime.now())
+                .build();
+
+        messagesService.saveMessage(messagesMapper.reverseMap(messagesDto));
+
+        System.out.println("Zapisanie");
+        ServiceResponse<Long> response = new ServiceResponse<Long>("success", recipientId);
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
+    }
+
+
+
+
+
 
 }

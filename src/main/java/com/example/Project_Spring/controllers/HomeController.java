@@ -20,7 +20,7 @@ public class HomeController {
     @GetMapping("/")
     public String homePage(Model model) {
 
-        model.addAttribute("news_list", newsServices.findAllNews());
+        model.addAttribute("news_list", newsServices.findAllNewsSortedByDate());
 
         return "index";
     }

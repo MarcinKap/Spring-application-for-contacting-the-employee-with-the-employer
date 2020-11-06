@@ -41,13 +41,13 @@ public class TopicServices {
         for (int i = 0; i < topicsList.size(); i++) {
 
 
-            if (topicsList.get(i).getId_sender() == null) {
+            if (topicsList.get(i).getSenderId() == null) {
                 continue;
             }
-            if (topicsList.get(i).getId_sender() == loggedUserID) {
+            if (topicsList.get(i).getSenderId() == loggedUserID) {
                 topicsList.get(i).setMailToDisplay(customUserService.getLoggedUsersEmail());
             } else {
-                topicsList.get(i).setMailToDisplay(customUserService.findUserEmailAdressById(topicsList.get(i).getId_sender()));
+                topicsList.get(i).setMailToDisplay(customUserService.findUserEmailAdressById(topicsList.get(i).getSenderId()));
             }
         }
         return topicsList;
@@ -59,9 +59,10 @@ public class TopicServices {
     }
 
 
-    public boolean deleteTopicsById(Long id) {
+    public void deleteTopicsById(Long id) {
+        topicRepository.deleteTopicById(id);
 
-        return topicRepository.deleteTopicById(id) == 1;
+//        return topicRepository.deleteTopicById(id) == 1;
     }
 
     public void updateNumberOfForumMessages(Long id) {

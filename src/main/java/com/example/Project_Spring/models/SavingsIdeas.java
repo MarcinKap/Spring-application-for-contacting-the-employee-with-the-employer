@@ -21,7 +21,7 @@ public class SavingsIdeas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String idea_subject;
+    private String ideaSubject;
     private String description;
     private String benefits;
     private String profitability;

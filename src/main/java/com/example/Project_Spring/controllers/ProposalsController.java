@@ -39,8 +39,8 @@ public class ProposalsController {
 
     @PostMapping("/sendMessage")
     public String addMessage(Model model,
-                             @org.springframework.lang.Nullable @RequestParam(value = "email_sender") String senderEmail,
-                             @RequestParam(value = "text_msg") String text_msg,
+                             @org.springframework.lang.Nullable @RequestParam(value = "senderEmail") String senderEmail,
+                             @RequestParam(value = "textMsg") String text_msg,
                              @org.springframework.lang.Nullable @RequestParam(value = "subject") String topic
     ) {
 
@@ -101,7 +101,6 @@ public class ProposalsController {
         System.out.println("Zapisanie");
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", id);
         return new ResponseEntity<Object>(response, HttpStatus.OK);
-
     }
 
     @GetMapping(value = "/event-count")

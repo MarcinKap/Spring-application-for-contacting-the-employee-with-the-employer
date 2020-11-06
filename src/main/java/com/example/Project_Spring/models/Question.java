@@ -20,7 +20,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long id_inquiry;
+    private Long idInquiry;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "question_answer",

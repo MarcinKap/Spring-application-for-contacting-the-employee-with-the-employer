@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+
+<head th:replace="document/head :: head_section">
+
+
+</head>
+<body>
+<div th:replace="document/content :: content_section_title"></div>
+
+
+<div class="survey-page">
+
+    <!--Section: Contact v.2-->
+    <section class="mb-4">
+        <div class="wrapper wrapper-content animated fadeInRight page-title">
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4 ">Tworzenie nowej wiadomości</h2>
+        </div>
+        <div class="row">
+        </div>
+    </section>
+
+
+    <div class="row col-sm-12 col-md-12 form-group" style="margin-top: 50px; margin-bottom: 10px">
+        <div class="col-sm-2 col-md-2 form-group border-between-rows">
+        </div>
+
+        <div class="col-sm-8 col-md-8 form-group border-between-rows">
+
+            <!--<div class="container mt-5 mb-5 ">-->
+            <div class="form-sec">
+                <h4>Nowa wiadmość</h4>
+
+                            <form th:object="${news}" th:action="@{/add-news}" method="post"
+                                  onsubmit="return(validate());"
+                                  novalidate="novalidate">
+                                <div class="form-group">
+                                    <label>Temat:</label>
+                                    <input type="text" th:field="*{title}" class="form-control" id="title"
+                                           placeholder="Tytuł/" name="title">
+                                </div>
+                                <!--                    <div class="form-group">-->
+                                <!--                        <label>Opis/Beschreibung:</label>-->
+                                <!--                        <textarea th:field="*{description}" class="form-control" id="description"-->
+                                <!--                                  placeholder="Opis/Beschreibung"></textarea>-->
+                                <!--                    </div>-->
+                                <div class="form-group">
+                                    <label>Krótki opis:</label>
+                                    <textarea class="form-control" th:field="*{shortText}"
+                                              placeholder="Krótki opis" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tekst:</label>
+                                    <textarea name="benefits" class="form-control" th:field="*{text}"
+                                              placeholder="Tekst" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Link do filmu:</label>
+                                    <input type="text" class="form-control" id="profitability"
+                                           placeholder="Link do filmu/" th:field="*{movieLink}" required>
+                                </div>
+<!--                                <div class="form-group">-->
+<!--                                    <label>Jednostka / Einheit:</label>-->
+<!--                                    <select type="text" class="form-control" th:field="*{unit}" required>-->
+<!--                                        <option value="PLN" selected>PLN</option>-->
+<!--                                        <option value="EUR">EUR</option>-->
+<!--                                        <option value="hours">Godziny / Stunden</option>-->
+<!--                                    </select>-->
+
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Kategoria / Kategorie:</label>-->
+<!--                                    <select type="number" class="form-control" title="categoryId" required>-->
+<!--                                        <option selected th:each="category : ${categories}"-->
+<!--                                                type="number" th:value="${category.getId()}"-->
+<!--                                                th:text="${category.getCategoryName()}"-->
+
+<!--                                        >-->
+<!--                                        </option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Charakter:</label>-->
+<!--                                    <select type="text" class="form-control" th:field="*{natureOfTheBenefit}" required>-->
+<!--                                        <option value="Jednorazowo / Einmalig" selected>-->
+<!--                                            Jednorazowo / Einmalig-->
+<!--                                        </option>-->
+<!--                                        <option value="Stały / Nachhaltig">-->
+<!--                                            Stały / Nachhaltig-->
+<!--                                        </option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Obszar / Bereich:</label>-->
+<!--                                    <select type="number" class="form-control" title="workAreaId" required>-->
+<!--                                        <option selected th:each="workArea : ${workAreas}"-->
+<!--                                                th:value="${workArea.getId()}"-->
+<!--                                                th:text="${workArea.getTitle()}"-->
+<!--                                        >-->
+<!--                                        </option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Rodzaj kosztów / Kostenart:</label>-->
+
+<!--                                    &lt;!&ndash;                    <div th:each="typesofCost : ${typesofCosts}" class="funkyradio funkyradio-primary">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                        <input type="checkbox" th:id="${typesofCost.getId()}">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                        <label th:for="${typesofCost.getId()}" th:text="${typesofCost.getTitle()}"></label>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+
+<!--                                    <ul class="list-group">-->
+<!--                                        <div th:each="typesofCost : ${typesofCosts}">-->
+<!--                                            <li class="list-group-item rounded-0 d-flex align-items-left">-->
+<!--                                                <div class=" custom-radio">-->
+<!--                                                    <input class="custom-control-input" th:id="${typesofCost.getId()}" type="radio" title="customRadio">-->
+<!--                                                    <label class="custom-control-label" th:for="${typesofCost.getId()}">-->
+<!--                                                        <p class="mb-0" style="text-align: left; padding-left: 20px" th:text="${typesofCost.getTitle()}"></p>-->
+<!--                                                        <span class="small font-italic text-muted">Classic marinara sauce, authentic old-world pepperoni</span>-->
+<!--                                                    </label>-->
+<!--                                                </div>-->
+<!--                                                <label th:for="${typesofCost.getId()}"></label>-->
+<!--                                            </li>-->
+<!--                                        </div>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+
+
+                                <button type="submit" class="btn btn-primary" id="accept-form">Wyślij</button>
+                            </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+
+<footer th:replace="document/footer :: footer_section"></footer>
+</body>
+
+</html>

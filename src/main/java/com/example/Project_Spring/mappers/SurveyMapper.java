@@ -14,7 +14,7 @@ public class SurveyMapper implements Mapper<Survey, SurveyDto> {
                 .builder()
                 .id(from.getId())
                 .question(from.getQuestion())
-                .nazwa_ankiety(from.getNazwa_ankiety())
+                .title(from.getTitle())
                 .build();
     }
 
@@ -24,7 +24,7 @@ public class SurveyMapper implements Mapper<Survey, SurveyDto> {
                 .builder()
                 .id(to.getId())
                 .question(to.getQuestion())
-                .nazwa_ankiety(to.getNazwa_ankiety())
+                .title(to.getTitle())
                 .build();
     }
 

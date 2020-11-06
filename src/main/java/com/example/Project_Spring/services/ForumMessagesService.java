@@ -42,6 +42,7 @@ public class ForumMessagesService {
     public void deleteForumMessageById(Long id){
 
         forumMessagesRepository.deleteMessagesById(id);
+
     }
 
     public int getNumberOfForumMessagesByTopicId(Long id){

@@ -2,8 +2,6 @@ package com.example.Project_Spring.mappers;
 
 import com.example.Project_Spring.models.ForumMessages;
 import com.example.Project_Spring.models.ForumMessagesDto;
-import com.example.Project_Spring.models.Messages;
-import com.example.Project_Spring.models.MessagesDto;
 import org.springframework.stereotype.Component;
 
 
@@ -16,12 +14,12 @@ public class ForumMessagesMapper implements Mapper<ForumMessages, ForumMessagesD
         return ForumMessagesDto
                 .builder()
                 .id(from.getId())
-                .email_sender(from.getEmail_sender())
-                .id_recipient(from.getId_recipient())
-                .id_sender(from.getId_sender())
-                .text_msg(from.getText_msg())
+                .senderEmail(from.getSenderEmail())
+                .recipientId(from.getRecipientId())
+                .senderId(from.getSenderId())
+                .textMsg(from.getTextMsg())
                 .topic(from.getTopic())
-                .id_topic(from.getId_topic())
+                .id_topic(from.getTopicId())
                 .createdDate(from.getCreatedDate())
                 .nameSender(from.getNameSender())
                 .build();
@@ -31,12 +29,12 @@ public class ForumMessagesMapper implements Mapper<ForumMessages, ForumMessagesD
         return ForumMessages
                 .builder()
                 .id(to.getId())
-                .email_sender(to.getEmail_sender())
-                .id_recipient(to.getId_recipient())
-                .id_sender(to.getId_sender())
-                .text_msg(to.getText_msg())
+                .senderEmail(to.getSenderEmail())
+                .recipientId(to.getRecipientId())
+                .senderId(to.getSenderId())
+                .textMsg(to.getTextMsg())
                 .topic(to.getTopic())
-                .id_topic(to.getId_topic())
+                .topicId(to.getId_topic())
                 .createdDate(to.getCreatedDate())
                 .nameSender(to.getNameSender())
                 .build();

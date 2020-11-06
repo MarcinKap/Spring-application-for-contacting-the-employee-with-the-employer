@@ -14,7 +14,7 @@ public class QuestionMapper implements Mapper<Question, QuestionDto> {
         return QuestionDto
                 .builder()
                 .id(from.getId())
-                .id_inquiry(from.getId_inquiry())
+                .idInquiry(from.getIdInquiry())
                 .lista(from.getLista())
                 .answer(from.getAnswer())
                 .build();
@@ -26,7 +26,7 @@ public class QuestionMapper implements Mapper<Question, QuestionDto> {
                 .builder()
                 .id(to.getId())
                 .lista(to.getLista())
-                .id_inquiry(to.getId_inquiry())
+                .idInquiry(to.getIdInquiry())
                 .answer(to.getAnswer())
                 .build();
     }

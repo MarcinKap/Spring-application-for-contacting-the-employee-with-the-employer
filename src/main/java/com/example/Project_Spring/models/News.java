@@ -20,7 +20,7 @@ public class News {
     private String title;
     private String text;
     private String shortText;
-    private String movie_link;
+    private String movieLink;
     private LocalDateTime createdDate;
 
 

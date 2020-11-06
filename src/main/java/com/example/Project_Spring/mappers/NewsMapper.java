@@ -14,7 +14,7 @@ public class NewsMapper implements Mapper<News, NewsDto> {
         return NewsDto
                 .builder()
                 .id(from.getId())
-                .movie_link(from.getMovie_link())
+                .movieLink(from.getMovieLink())
                 .text(from.getText())
                 .title(from.getTitle())
                 .build();
@@ -25,7 +25,7 @@ public class NewsMapper implements Mapper<News, NewsDto> {
         return News
                 .builder()
                 .id(to.getId())
-                .movie_link(to.getMovie_link())
+                .movieLink(to.getMovieLink())
                 .text(to.getText())
                 .title(to.getTitle())
                 .build();

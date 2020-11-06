@@ -135,6 +135,7 @@
 
         }
 
+
         function updateProposal(id) {
             $.ajax({
                 url: updateReadedParamById(id),
@@ -158,77 +159,82 @@
             });
         }
 
+        var x = null;
 
         function updateMessagesList(param) {
+
+            x = param;
             $.ajax({
+
                 url: showMessages(param),
                 success: function () {
-                    setInterval(function() { updateMessages(param); }, 1000);
+
+                   var interval = setInterval(function () {
+                        // var id = document.getElementById('recipientId').value;
+                       if(x!==param){
+                           clearInterval(interval);
+
+                       }else{
+                           updateMessages(param);
+                       }
+
+
+
+
+                    }, 1000);
                 }
             })
-            // updateMessages(param);
-            // // setInterval(function() { updateMessages(param); }, 1000);
-
 
         }
 
         function showMessages(param) {
+
             $.get("show-messages", {friendId: param}).done(function (fragment) { // get from controller
                 $("#showMessages").replaceWith(fragment); // update snippet of page
             });
         }
+
         function updateMessages(param) {
             $.get("update-messages", {friendId: param}).done(function (fragment) { // get from controller
                 $("#updateMessages").replaceWith(fragment); // update snippet of page
             });
         }
 
-
-
-
-        //WEBSOCKET
-        var client = null;
-        var color;
-        const url = 'http://localhost:8080';
-
-
-        function showMessage(value, user, userColor) {
-            var newResponse = document.createElement('p');
-            newResponse.style.color = userColor;
-            newResponse.appendChild(document.createTextNode(user));
-            newResponse.appendChild(document.createTextNode(": "));
-            newResponse.appendChild(document.createTextNode(value));
-            var respone = document.getElementById('reponse');
-            respone.appendChild(newResponse);
-        }
-
-        function connect() {
-            let socket = new SockJS(url + '/chat');
-
-            client = Stomp.over(socket);
-            color = getRandomColor();
-            client.connect({}, function (frame) {
-                client.subscribe("/topic/messages", function(message){
-                    showMessage(JSON.parse(message.body).value, JSON.parse(message.body).user, JSON.parse(message.body).userColor)
-                });
+        function sendPrivateMessage(id) {
+            var text = document.getElementById('text_msg').value;
+            document.getElementById("text_msg").value = "";
+            $.ajax({
+                url: saveMessage(id, text),
+                success: function () {
+                    updateMessages(id);
+                }
             })
         }
 
-        function sendMessage() {
-            var messageToSend = document.getElementById('messageToSend').value;
-            var user = document.getElementById('user').value;
-            client.send("/app/chat", {}, JSON.stringify({'value': messageToSend, 'user': user, 'userColor': color}) );
-            document.getElementById('messageToSend').value = "";
+        //ZAPIS
+        function saveMessage(id, text) {
+            $.post("/saveMessage", {
+                recipientId: id,
+                textMsg: text
+            });
         }
 
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
+
+        var date = null;
+    //    WYSWIETLANIE DATY
+        function showDate(id) {
+            // var actualDate = document.getElementById(id).textContent;
+            // console.log(actualDate);
+            console.log("trololo");
+            // console.log(date);
+            // if(date===actualDate){
+                document.getElementById(id).hidden = true;
+            // }
+            // date = actualDate;
+            // console.log(date);
+
         }
+
 
 
     </script>
@@ -237,7 +243,7 @@
     <!--    libs for stomp and sockjs-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<!--    <script src="/static/websocket.js"></script>-->
+    <!--    <script src="/static/websocket.js"></script>-->
     <script src="/templates/account-menu/stomp.js"></script>
 
 

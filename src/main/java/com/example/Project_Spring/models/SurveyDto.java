@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 public class SurveyDto {
 
     private Long id;
-    private String nazwa_ankiety;
+    private String title;
 
 
 

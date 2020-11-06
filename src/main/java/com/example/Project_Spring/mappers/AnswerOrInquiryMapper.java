@@ -14,7 +14,7 @@ public class AnswerOrInquiryMapper implements Mapper<AnswerOrInquiry, AnswerOrIn
                 .builder()
                 .id(from.getId())
                 .lista(from.getLista())
-                .text_msg(from.getText_msg())
+                .textMsg(from.getTextMsg())
                 .build();
     }
 
@@ -24,7 +24,7 @@ public class AnswerOrInquiryMapper implements Mapper<AnswerOrInquiry, AnswerOrIn
                 .builder()
                 .id(to.getId())
                 .lista(to.getLista())
-                .text_msg(to.getText_msg())
+                .textMsg(to.getTextMsg())
                 .build();
     }
 

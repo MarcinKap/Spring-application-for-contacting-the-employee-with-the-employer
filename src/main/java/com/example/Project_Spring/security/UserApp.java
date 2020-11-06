@@ -22,7 +22,7 @@ import java.util.Set;
 public class UserApp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "user_id")
+//    @Column(title = "user_id")
     private Long id;
 //    @Email
     private String email;

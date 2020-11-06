@@ -21,10 +21,10 @@ public class ForumMessagesDto {
 
 
     @Nullable
-    private Long id_sender;
-    private String email_sender;
-    private Long id_recipient;
-    private String text_msg;
+    private Long senderId;
+    private String senderEmail;
+    private Long recipientId;
+    private String textMsg;
     private String topic;
     private String nameSender;
 

@@ -20,8 +20,8 @@ public class Topic {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         private String topic;
-        private Long id_sender;
-        private Long id_recipient;
+        private Long senderId;
+        private Long recipientId;
         private String mailToDisplay;
         private String creatorName;
         private Boolean forumTopic;

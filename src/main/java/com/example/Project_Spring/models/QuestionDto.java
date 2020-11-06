@@ -18,7 +18,7 @@ public class QuestionDto {
 
 
     private Long id;
-    private Long id_inquiry;
+    private Long idInquiry;
 
 
     //    AnswerOrInquiry inquiry;

@@ -84,7 +84,7 @@ public class CustomUserService implements UserDetailsService {
 //                        c.setAdresses(currentUser.getAdresses());
 //                        c.setCompanies_adresses(currentUser.getCompanies_adresses());
 //                        c.setLastName(currentUser.getLastName());
-//                        c.setName(currentUser.getName());
+//                        c.setTitle(currentUser.getTitle());
 
                     return userAppRepository.save(c);
                 })

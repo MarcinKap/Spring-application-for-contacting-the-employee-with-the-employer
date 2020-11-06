@@ -16,7 +16,7 @@ import java.util.Set;
 public class SavingsIdeasDto {
 
     private Long id;
-    private String idea_subject;
+    private String ideaSubject;
     private String description;
     private String benefits;
     private String profitability;

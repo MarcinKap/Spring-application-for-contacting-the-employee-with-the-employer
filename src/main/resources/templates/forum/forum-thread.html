@@ -70,15 +70,15 @@
 
 
                     <span style="" class=" be-comment-text col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"
-                          th:text="${message.getText_msg()}">
+                          th:text="${message.getTextMsg()}">
 
                     </span>
-                        <div th:if="${message.getId_sender()} == ${currentLoggedUserId}" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="display: flex;
+                        <div th:if="${message.getSenderId()} == ${currentLoggedUserId}" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="display: flex;
   justify-content: left;
   align-items: center;">
                             <form action="/deleteMessage" method="get">
 
-                                <!--                            <input type="hidden" th:value="${topicId}" name="topicId">-->
+                                <!--                            <input type="hidden" th:value="${topicId}" title="topicId">-->
                                 <input type="hidden" th:value="${message.getId()}" name="messageId">
                                 <input type="hidden" th:value="${topic.getId()}" name="topicId">
                                 <button type="submit" style="font-size: 20px; line-height: 100%"

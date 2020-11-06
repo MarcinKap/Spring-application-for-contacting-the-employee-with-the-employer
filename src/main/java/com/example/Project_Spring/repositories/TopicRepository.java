@@ -20,11 +20,11 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
     @Query("select t from Topic t where t.id = ?1")
     Topic findTopicById(Long id);
 
-    @Query("select t from Topic t where t.id_recipient = ?1 or t.id_sender = ?1" )
+    @Query("select t from Topic t where t.recipientId = ?1 or t.senderId = ?1" )
     List<Topic> findTopicsByLoggedIdUser(Integer id);
 
 
-    @Query("select t from Topic t where (t.id_recipient = ?1 or t.id_sender = ?1) and (t.forumTopic = ?2 or t.forumTopic = null) " )
+    @Query("select t from Topic t where (t.recipientId = ?1 or t.senderId = ?1) and (t.forumTopic = ?2 or t.forumTopic = null) " )
     List<Topic> findTopicsByLoggedIdUserAndForumTopic(Long id, Boolean bool);
 
     @Query("select t from Topic t where t.forumTopic = ?1")

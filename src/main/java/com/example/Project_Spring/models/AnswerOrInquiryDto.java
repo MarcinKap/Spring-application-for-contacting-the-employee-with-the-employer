@@ -18,7 +18,7 @@ public class AnswerOrInquiryDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String text_msg;
+    private String textMsg;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "answerorinquiry")

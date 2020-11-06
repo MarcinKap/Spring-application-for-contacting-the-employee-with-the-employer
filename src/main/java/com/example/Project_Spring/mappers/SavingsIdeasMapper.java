@@ -14,7 +14,7 @@ public class SavingsIdeasMapper implements Mapper<SavingsIdeas, SavingsIdeasDto>
         return SavingsIdeasDto
                 .builder()
                 .id(from.getId())
-                .idea_subject(from.getIdea_subject())
+                .ideaSubject(from.getIdeaSubject())
                 .description(from.getDescription())
                 .benefits(from.getBenefits())
                 .profitability(from.getProfitability())
@@ -33,7 +33,7 @@ public class SavingsIdeasMapper implements Mapper<SavingsIdeas, SavingsIdeasDto>
         return SavingsIdeas
                 .builder()
                 .id(to.getId())
-                .idea_subject(to.getIdea_subject())
+                .ideaSubject(to.getIdeaSubject())
                 .description(to.getDescription())
                 .benefits(to.getBenefits())
                 .profitability(to.getProfitability())

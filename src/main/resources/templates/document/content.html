@@ -34,7 +34,7 @@
             </a>
         </div>
         <div th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('USER')}">
-            <a href="/account-menu/account-index" class="btn btn-primary btn-sm h-d-btn"
+            <a href="/account-menu/account-data" class="btn btn-primary btn-sm h-d-btn"
                th:text="#{content.my_account}">
             </a>
         </div>

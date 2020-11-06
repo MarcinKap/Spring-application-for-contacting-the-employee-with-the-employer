@@ -4,6 +4,7 @@ import com.example.Project_Spring.mappers.NewsMapper;
 import com.example.Project_Spring.models.News;
 import com.example.Project_Spring.repositories.NewsRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,9 +35,13 @@ public class NewsServices {
 //            System.out.println(newsList.get(i).getText());
 //        }
 
+
         return newsRepository.findAll();
     }
+    public List<News> findAllNewsSortedByDate(){
 
+        return newsRepository.findAll(Sort.by(Sort.Direction.DESC, "createdDate"));
+    }
 
 
 

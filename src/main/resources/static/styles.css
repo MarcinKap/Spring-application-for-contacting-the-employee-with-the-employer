@@ -2755,12 +2755,13 @@ ul {
     max-width: 1000px;
 }
 
-.page-timeline:before {
+.timeline:before {
     position: absolute;
     content: '';
     top: 0;
     bottom: 0;
-    left: 303px;
+
+    left: 50%;
     right: auto;
     height: 100%;
     width: 3px;
@@ -2771,7 +2772,18 @@ ul {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
 }
 
-.page-timeline:after {
+.timeline-v1:after {
+    position: absolute;
+    content: '';
+    width: 3px;
+    height: 40px;
+    background: #3498db;
+    top: 100%;
+    left: 50%;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
+}
+.timeline-v2:after {
     position: absolute;
     content: '';
     width: 3px;
@@ -2780,11 +2792,11 @@ ul {
     background: -webkit-linear-gradient(top, #4782d3, rgba(52, 152, 219, 0));
     background: linear-gradient(to bottom, #4782d3, rgba(52, 152, 219, 0));
     top: 100%;
-    left: 303px;
-
+    left: 50%;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
 }
+
 
 .vtimeline-content {
     /*margin-left: 350px;*/
@@ -2828,7 +2840,7 @@ ul {
     text-align: center;
     line-height: 50px;
     z-index: 99;
-    margin-left: 280px;
+    /*margin-left: 280px;*/
 }
 
 .vtimeline-icon i {
