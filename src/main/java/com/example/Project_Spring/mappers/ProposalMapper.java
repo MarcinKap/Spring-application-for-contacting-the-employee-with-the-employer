@@ -11,7 +11,7 @@ public class ProposalMapper implements Mapper<Proposal, ProposalDto> {
         return ProposalDto
                 .builder()
                 .id(from.getId())
-                .senderId(from.getSenderId())
+                .sender(from.getSender())
                 .senderEmail(from.getSenderEmail())
                 .nameAndSurname(from.getNameAndSurname())
                 .textMessage(from.getTextMessage())
@@ -25,7 +25,7 @@ public class ProposalMapper implements Mapper<Proposal, ProposalDto> {
         return Proposal
                 .builder()
                 .id(to.getId())
-                .senderId(to.getSenderId())
+                .sender(to.getSender())
                 .senderEmail(to.getSenderEmail())
                 .nameAndSurname(to.getNameAndSurname())
                 .textMessage(to.getTextMessage())

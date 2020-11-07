@@ -58,7 +58,7 @@ public class UserMenuController {
     @GetMapping("/account-menu/account-sended-messages")
     public String accountSendedMessages(Model model) {
         Long id = customUserService.getLoggedUsersId();
-        model.addAttribute("sended_messages", messagesService.getMessagesBySenderId(id));
+//        model.addAttribute("sended_messages", messagesService.getMessagesBySenderId(id));
         return "account-menu/account-sended-messages";
 
     }
@@ -68,8 +68,8 @@ public class UserMenuController {
     @GetMapping("/account-menu/account-data")
     public String accountData(Model model) {
 
-        UserApp currentUser = customUserService.getLoggedUser();
-        model.addAttribute("user", currentUser);
+
+        model.addAttribute("current_logged_user", customUserService.getLoggedUser());
         return "account-menu/account-data";
     }
 

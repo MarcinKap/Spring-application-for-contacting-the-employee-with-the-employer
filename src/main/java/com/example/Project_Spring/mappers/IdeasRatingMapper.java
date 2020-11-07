@@ -13,8 +13,8 @@ public class IdeasRatingMapper implements Mapper<IdeasRating, IdeasRatingDto> {
         return IdeasRatingDto
                 .builder()
                 .id(from.getId())
-                .ideaId(from.getIdeaId())
-                .userId(from.getUserId())
+                .savingsIdeas(from.getSavingsIdeas())
+                .evaluator(from.getEvaluator())
                 .rating(from.getRating())
                 .build();
     }
@@ -23,8 +23,8 @@ public class IdeasRatingMapper implements Mapper<IdeasRating, IdeasRatingDto> {
         return IdeasRating
                 .builder()
                 .id(to.getId())
-                .ideaId(to.getIdeaId())
-                .userId(to.getUserId())
+                .savingsIdeas(to.getSavingsIdeas())
+                .evaluator(to.getEvaluator())
                 .rating(to.getRating())
                 .build();
     }

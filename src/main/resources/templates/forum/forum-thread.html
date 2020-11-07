@@ -44,8 +44,10 @@
                     <div class="forum-icon">
                         <i class="fa fa-bolt"></i>
                     </div>
-                    <a class="forum-item-title" th:text="${topic.getCreatorName()}">osoba tworząca post</a>
-                    <div class="forum-sub-title" th:text="${topic.getTopicFirstMsg()}"> wiadomość</div>
+                    <a class="forum-item-title"
+                       th:text="${topic.getSender().getName() + ' '+ topic.getSender().getLastName() }">osoba tworząca
+                        post</a>
+                    <div class="forum-sub-title" th:text="${topic.getText()}"> wiadomość</div>
                 </div>
                 <div class="col-md-1 forum-info"></div>
                 <div class="col-md-1 forum-info">
@@ -55,11 +57,11 @@
 
 
         <div class="">
-            <div class="be-comment" data-th-each="message : ${forumMessages}">
+            <div class="be-comment" data-th-each="message : ${topic.getAssignedForumMessages()}">
                 <div class="be-comment-content">
 
 				<span class="be-comment-name">
-					<a th:text="${message.getNameSender()}"></a>
+					<a th:text="${message.getSender().getName() + ' ' + message.getSender().getLastName()}"></a>
 					</span>
                     <span class="be-comment-time">
 					<i class="fa fa-clock-o"
@@ -73,9 +75,10 @@
                           th:text="${message.getTextMsg()}">
 
                     </span>
-                        <div th:if="${message.getSenderId()} == ${currentLoggedUserId}" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="display: flex;
-  justify-content: left;
-  align-items: center;">
+                        <div th:if="${message.getSender().getId()} == ${currentLoggedUser}"
+                             class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="display: flex;
+                      justify-content: left;                      align-items: center;">
+
                             <form action="/deleteMessage" method="get">
 
                                 <!--                            <input type="hidden" th:value="${topicId}" title="topicId">-->
@@ -102,7 +105,7 @@
             <form accept-charset="UTF-8" th:action="@{/forum/forum-post-creator}" method="POST" role="form"
                   class="">
 
-                <input type="hidden" th:value="${topic.getId()}" name="topicId">
+                <input type="hidden" th:value="${topic.getId()}" th:id="topicId" name="topicId">
                 <div class="form-group">
                             <textarea class="form-control counted" rows="3" name="message_text" placeholder="Tekst"
                                       style="font-size: 14px"></textarea>
@@ -114,6 +117,8 @@
             </form>
         </div>
     </div>
+
+
 </div>
 </div>
 </div>

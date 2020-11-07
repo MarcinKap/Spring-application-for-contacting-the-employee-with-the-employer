@@ -1,6 +1,7 @@
 package com.example.Project_Spring.models;
 
 
+import com.example.Project_Spring.security.UserApp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class IdeasRatingDto {
 
     private Long id;
-    private Long userId;
-    private Long ideaId;
     private int rating;
+    private SavingsIdeas savingsIdeas;
+    private UserApp evaluator;
 }

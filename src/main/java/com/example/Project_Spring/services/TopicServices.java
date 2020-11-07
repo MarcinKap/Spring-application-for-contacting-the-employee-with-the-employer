@@ -14,11 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 public class TopicServices {
 
-    ForumMessagesService forumMessagesService;
+//    ForumMessagesService forumMessagesService;
     TopicMapper topicMapper;
     TopicRepository topicRepository;
-
-    CustomUserService customUserService;
+//    CustomUserService customUserService;
 
     public void saveTopic(Topic topic) {
         topicRepository.save(topic);
@@ -32,47 +31,23 @@ public class TopicServices {
         return topicRepository.findTopicById(id);
     }
 
-
-    public List<Topic> getTopicsByLoggedIdUser() {
-
-        Long loggedUserID = customUserService.getLoggedUsersId();
-        List<Topic> topicsList = topicRepository.findTopicsByLoggedIdUserAndForumTopic(loggedUserID, false);
-
-        for (int i = 0; i < topicsList.size(); i++) {
-
-
-            if (topicsList.get(i).getSenderId() == null) {
-                continue;
-            }
-            if (topicsList.get(i).getSenderId() == loggedUserID) {
-                topicsList.get(i).setMailToDisplay(customUserService.getLoggedUsersEmail());
-            } else {
-                topicsList.get(i).setMailToDisplay(customUserService.findUserEmailAdressById(topicsList.get(i).getSenderId()));
-            }
-        }
-        return topicsList;
+    public List<Topic> findAllTopics(){
+        return topicRepository.findAll();
     }
-
-    public List<Topic> getForumThreads() {
-
-        return topicRepository.findTopicsByForumTopicBoolean(true);
-    }
-
 
     public void deleteTopicsById(Long id) {
         topicRepository.deleteTopicById(id);
-
-//        return topicRepository.deleteTopicById(id) == 1;
     }
 
     public void updateNumberOfForumMessages(Long id) {
         Topic topic = getTopicById(id);
-        int numberOfForumMessages = forumMessagesService.getNumberOfForumMessagesByTopicId(id);
-        topic.setNumberOfForumMessages(numberOfForumMessages);
+        topic.setNumberOfForumMessages(topic.getAssignedForumMessages().size());
         topicRepository.save(topic);
     }
+
+
     public void updateNumberOfForumMessages(Topic topic) {
-        int numberOfForumMessages = forumMessagesService.getNumberOfForumMessagesByTopicId(topic.getId());
+        int numberOfForumMessages = topic.getAssignedForumMessages().size();
         topic.setNumberOfForumMessages(numberOfForumMessages);
         topicRepository.save(topic);
     }

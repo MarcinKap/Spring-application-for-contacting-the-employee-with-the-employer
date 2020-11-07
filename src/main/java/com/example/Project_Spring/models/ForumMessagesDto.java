@@ -1,5 +1,6 @@
 package com.example.Project_Spring.models;
 
+import com.example.Project_Spring.security.UserApp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,18 +17,10 @@ import java.time.LocalDateTime;
 @Builder
 public class ForumMessagesDto {
     private Long id;
-
-    private Long id_topic;
-
-
-    @Nullable
-    private Long senderId;
-    private String senderEmail;
-    private Long recipientId;
     private String textMsg;
-    private String topic;
-    private String nameSender;
-
     private LocalDateTime createdDate;
+    private UserApp sender;
+    private Topic topic;
+
 
 }

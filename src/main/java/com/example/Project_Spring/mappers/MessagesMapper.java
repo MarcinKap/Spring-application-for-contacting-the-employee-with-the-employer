@@ -13,10 +13,10 @@ public class MessagesMapper implements Mapper<Messages, MessagesDto> {
         return MessagesDto
                 .builder()
                 .id(from.getId())
-                .recipientId(from.getRecipientId())
-                .senderId(from.getSenderId())
                 .textMsg(from.getTextMsg())
                 .createdDate(from.getCreatedDate())
+                .sender(from.getSender())
+                .recipient(from.getRecipient())
                 .build();
     }
     @Override
@@ -24,10 +24,10 @@ public class MessagesMapper implements Mapper<Messages, MessagesDto> {
         return Messages
                 .builder()
                 .id(to.getId())
-                .recipientId(to.getRecipientId())
-                .senderId(to.getSenderId())
                 .textMsg(to.getTextMsg())
                 .createdDate(to.getCreatedDate())
+                .sender(to.getSender())
+                .recipient(to.getRecipient())
                 .build();
     }
 }

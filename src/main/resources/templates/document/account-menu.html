@@ -8,11 +8,11 @@
         <div class="user-info">
             <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
             <ul class="meta list list-unstyled">
-                <li class="name">Rebecca Sanders
+                <li class="name" th:text="${current_logged_user.getName() + ' ' + current_logged_user.getLastName()}">
                     <label class="label label-info">UX Designer</label>
                 </li>
-                <li class="email"><a href="#" >Rebecca.S@website.com</a></li>
-                <li class="activity">Last logged in: Today at 2:18pm</li>
+                <li class="email"><a href="#" th:text="${current_logged_user.getEmail()}" ></a></li>
+<!--                <li class="activity">Last logged in: Today at 2:18pm</li>-->
             </ul>
         </div>
         <nav class="side-menu">
@@ -23,7 +23,7 @@
                 <li th:classappend="${#httpServletRequest.getRequestURI() == '/account-menu/account-private-messages' ? 'active':''}"><a href="/account-menu/account-private-messages"><span class="fa fa-envelope"></span> Wiadomości</a></li>
 
 <!--                <li><a href="user-drive.html"><span class="fa fa-th"></span> Drive</a></li>-->
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/account-menu/account-proposals' ? 'active':''}"><a href="/account-menu/account-proposals"><span class="fa fa-clock-o"></span>Wnioski</a></li>
+                <li th:if="${#request.isUserInRole('ADMIN')}" th:classappend="${#httpServletRequest.getRequestURI() == '/account-menu/account-proposals' ? 'active':''}"><a href="/account-menu/account-proposals"><span class="fa fa-clock-o"></span>Wnioski</a></li>
             </ul>
         </nav>
     </div>

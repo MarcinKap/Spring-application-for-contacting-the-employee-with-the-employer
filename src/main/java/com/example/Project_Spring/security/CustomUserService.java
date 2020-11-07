@@ -1,5 +1,7 @@
 package com.example.Project_Spring.security;
 
+import com.example.Project_Spring.models.Messages;
+import com.example.Project_Spring.services.MessagesService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +20,8 @@ public class CustomUserService implements UserDetailsService {
     private UserAppRepository userAppRepository;
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
+
+    private MessagesService messagesService;
 
     public CustomUserService(UserAppRepository userAppRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userAppRepository = userAppRepository;
@@ -142,6 +146,84 @@ public class CustomUserService implements UserDetailsService {
 
         return userAppList;
     }
+
+
+
+    public Set<UserApp> findUsersFriend(UserApp userApp){
+        System.out.println("Szukanie znajomych");
+
+
+        Set<UserApp> userAppSet = new HashSet<>();
+
+//        Wiadomości wysłane przez użytkownika - szukamy odbiorcy
+        System.out.println(userApp.getName() + userApp.getLastName());
+        Set<Messages> sendedMessages = userApp.getSentMessagesList();
+        System.out.println("wysłane wiadomosci " + sendedMessages.size());
+        for (Messages message: sendedMessages
+             ) {
+            userAppSet.add(message.getRecipient());
+        }
+//        Wiadomości odebrane przez użytkownika - szukamy osoby wysyłającej
+        Set<Messages> receivedMessages = userApp.getReceivedMessagesList();
+        System.out.println("odebrane wiadomosci " + receivedMessages.size());
+        for (Messages message: receivedMessages
+        ) {
+            userAppSet.add(message.getSender());;
+        }
+        return  userAppSet;
+      }
+
+
+
+
+
+
+//    public List<UserApp> getUserAppListConnectedWithMessages(UserApp currentLoggedUser) {
+////1
+//        //        Zdobycie listy wysłanych wiadmości
+//        Set<Messages> sended = currentLoggedUser.getSentMessagesList();
+////        Zdobycie listy użytkowników którzy otrzymali te wiadomości poprzez messageService
+//        Set<Long> friendsId = messagesService.
+//        System.out.println("lista1 trololol");
+//
+//
+////2
+////        Zdobycie listy otrzymanych wiadomości
+//        Set<Messages> received = currentLoggedUser.getSentMessagesList();
+////          Zdobycie listy użytkowników którzy wysłali te wiadomości (SENDER)
+//
+//
+//
+//
+////        List<UserApp> userAppList = new ArrayList<>();
+//        System.out.println("trolol2");
+//        System.out.println(userAppList.size());
+//
+//
+//
+//
+////        for (Messages message : received
+////             ) {
+////            message.getSender()
+////
+////        }
+////        messagesService.findMessagesByUserApp(currentLoggedUser);
+////        userAppList.addAll(userAppRepository.findUserAppsBySentMessagesList(currentLoggedUser));
+//
+//
+//
+//
+//
+//
+//
+//
+//
+////        List<UserApp> userAppList = new ArrayList<>(userAppRepository.findUserAppsByIdIsIn(idList));
+//
+//        return userAppList;
+//    }
+
+
 
 
 }

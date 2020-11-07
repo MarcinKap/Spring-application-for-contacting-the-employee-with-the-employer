@@ -1,5 +1,6 @@
 package com.example.Project_Spring.models;
 
+import com.example.Project_Spring.security.UserApp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class ProposalDto {
     private Long id;
 
     @Nullable
-    private Long senderId;
+    private UserApp sender;
     @Nullable
     private String senderEmail;
     @Nullable

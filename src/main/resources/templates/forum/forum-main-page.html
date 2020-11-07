@@ -44,9 +44,9 @@
                     <div class="forum-icon">
                         <i class="fa fa-bolt"></i>
                     </div>
-                    <a th:href="@{'/forum/forum-thread?topicId=' + ${thread.getId()}}" class="forum-item-title"
+                    <a th:href="@{'/forum/forum-thread?topic=' + ${thread.getId()}}" class="forum-item-title"
                        th:text="${thread.topic}"></a>
-                    <div class="forum-sub-title" th:text="${thread.getTopicFirstMsg()}"></div>
+<!--                    <div class="forum-sub-title" th:text="${thread.getTopicFirstMsg()}"></div>-->
                 </div>
                 <div class="col-md-1 forum-info"></div>
                 <div class="col-md-1 forum-info">

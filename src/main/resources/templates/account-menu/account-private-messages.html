@@ -32,19 +32,21 @@
                                             <div class="row no-gutters">
                                                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
                                                     <div class="users-container">
-                                                        <div class="chat-search-box">
-                                                            <div class="input-group">
-                                                                <input class="form-control" placeholder="Search">
-                                                                <div class="input-group-btn">
-                                                                    <button type="button" class="btn btn-info">
-                                                                        <i class="fa fa-search"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+<!--                                                        <div class="chat-search-box">-->
+<!--                                                            <div class="input-group">-->
+<!--                                                                <input class="form-control" placeholder="Search">-->
+<!--                                                                <div class="input-group-btn">-->
+<!--                                                                    <button type="button" class="btn btn-info">-->
+<!--                                                                        <i class="fa fa-search"></i>-->
+<!--                                                                    </button>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
                                                         <ul class="users">
 
-                                                            <li th:onclick="'javascript:updateMessagesList(\'' + ${user.getId()} + '\');'" th:each="user : ${users_list}" class="person" data-chat="person1">
+
+<!--                                                            -->
+                                                            <li th:onclick="'javascript:updateMessagesList(\'' + ${user.getId()} + '\');'"  th:each="user : ${users_list}" class="person" data-chat="person1">
 
 <!--                                                                <a th:href="@{'/account-menu/account-private-messages?friendId=' + ${user.getId()}}">-->
                                                                 <a >
@@ -81,13 +83,13 @@
                                                         <div  class="chat-container" th:if="${friend}!=null">
                                                             <ul id="updateMessages"  class="chat-box chatContainerScroll">
                                                                 <li th:each="message : ${messages}"
-                                                                    th:classappend="${message.getSenderId() == logged_user.getId()} ? 'chat-right' : 'chat-left'">
+                                                                    th:classappend="${message.getSender().getId() == (current_logged_user.getId())} ? 'chat-right' : 'chat-left'">
 
 
                                                                     <div class="chat-avatar">
                                                                         <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
                                                                              alt="Retail Admin">
-                                                                        <div th:text="${message.getSenderId() == logged_user.getId()} ? ${logged_user.getName()} : ${friend.getName()} "
+                                                                        <div th:text="${message.getSender().getId() == (current_logged_user.getId())} ? ${current_logged_user.getName()} : ${friend.getName()} "
                                                                              class="chat-name">Russell
                                                                         </div>
                                                                     </div>

@@ -14,6 +14,7 @@ public class SavingsIdeasMapper implements Mapper<SavingsIdeas, SavingsIdeasDto>
         return SavingsIdeasDto
                 .builder()
                 .id(from.getId())
+                .ratingList(from.getRatingList())
                 .ideaSubject(from.getIdeaSubject())
                 .description(from.getDescription())
                 .benefits(from.getBenefits())
@@ -25,6 +26,7 @@ public class SavingsIdeasMapper implements Mapper<SavingsIdeas, SavingsIdeasDto>
                 .workAreas(from.getWorkAreas())
                 .dateOfCreation(from.getDateOfCreation())
                 .averageRating(from.getAverageRating())
+                .sender(from.getSender())
                 .build();
     }
 
@@ -33,6 +35,7 @@ public class SavingsIdeasMapper implements Mapper<SavingsIdeas, SavingsIdeasDto>
         return SavingsIdeas
                 .builder()
                 .id(to.getId())
+                .ratingList(to.getRatingList())
                 .ideaSubject(to.getIdeaSubject())
                 .description(to.getDescription())
                 .benefits(to.getBenefits())
@@ -44,6 +47,7 @@ public class SavingsIdeasMapper implements Mapper<SavingsIdeas, SavingsIdeasDto>
                 .workAreas(to.getWorkAreas())
                 .dateOfCreation(to.getDateOfCreation())
                 .averageRating(to.getAverageRating())
+                .sender(to.getSender())
                 .build();
     }
 

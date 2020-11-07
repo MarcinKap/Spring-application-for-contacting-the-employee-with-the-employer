@@ -15,14 +15,11 @@ public class TopicMapper implements Mapper<Topic, TopicDto> {
                 .builder()
                 .id(from.getId())
                 .topic(from.getTopic())
-                .senderId(from.getSenderId())
-                .recipientId(from.getRecipientId())
-                .mailToDisplay(from.getMailToDisplay())
-                .creatorName(from.getCreatorName())
+                .text(from.getText())
                 .dateOfCreation(from.getDateOfCreation())
-                .forumTopic(from.getForumTopic())
-                .topicFirstMsg(from.getTopicFirstMsg())
                 .numberOfForumMessages(from.getNumberOfForumMessages())
+                .sender(from.getSender())
+                .assignedForumMessages(from.getAssignedForumMessages())
                 .build();
     }
 
@@ -32,13 +29,9 @@ public class TopicMapper implements Mapper<Topic, TopicDto> {
                 .builder()
                 .id(to.getId())
                 .topic(to.getTopic())
-                .senderId(to.getSenderId())
-                .recipientId(to.getRecipientId())
-                .mailToDisplay(to.getMailToDisplay())
-                .creatorName(to.getCreatorName())
+                .text(to.getText())
+                .sender(to.getSender())
                 .dateOfCreation(to.getDateOfCreation())
-                .forumTopic(to.getForumTopic())
-                .topicFirstMsg(to.getTopicFirstMsg())
                 .numberOfForumMessages(to.getNumberOfForumMessages())
                 .build();
     }

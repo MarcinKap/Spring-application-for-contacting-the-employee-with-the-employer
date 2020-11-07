@@ -1,5 +1,6 @@
 package com.example.Project_Spring.models;
 
+import com.example.Project_Spring.security.UserApp;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -18,27 +19,23 @@ public class ForumMessages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long topicId;
-
-    @Nullable
-    private Long senderId;
-    @Nullable
-    private String senderEmail;
-
-    private Long recipientId;
-
     private String textMsg;
-
-
-    private String topic;
-
     private LocalDateTime createdDate;
 
-    private String nameSender;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "list_of_sent_forum_messages_by_user",
+            joinColumns =
+            @JoinColumn(name = "forum_message_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private UserApp sender;
 
-
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "list_of_messages_assigned_to_topic",
+            joinColumns =
+            @JoinColumn(name = "forum_message_id"),
+            inverseJoinColumns = @JoinColumn(name = "topic_id")
+    )
+    private Topic topic;
 
 }

@@ -4,6 +4,7 @@ import com.example.Project_Spring.mappers.ProposalMapper;
 import com.example.Project_Spring.models.Proposal;
 import com.example.Project_Spring.models.ProposalDto;
 import com.example.Project_Spring.repositories.ProposalRepository;
+import com.example.Project_Spring.security.CustomUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,14 @@ public class ProposalService {
 
     ProposalRepository proposalRepository;
     ProposalMapper proposalMapper;
+    CustomUserService customUserService;
 
   public void saveProposal(String topic, String textMessage, @Nullable Long senderId, @Nullable String senderEmail, @Nullable String nameAndSurname){
 
       ProposalDto proposalDto = ProposalDto.builder()
               .topic(topic)
               .textMessage(textMessage)
-              .senderId(senderId)
+              .sender(customUserService.findUserById(senderId))
               .senderEmail(senderEmail)
               .nameAndSurname(nameAndSurname)
               .creationDate(LocalDateTime.now())

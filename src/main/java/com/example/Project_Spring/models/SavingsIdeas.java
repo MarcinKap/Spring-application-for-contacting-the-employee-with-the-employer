@@ -1,7 +1,10 @@
 package com.example.Project_Spring.models;
 
 
+import com.example.Project_Spring.security.UserApp;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,6 +34,12 @@ public class SavingsIdeas {
 
     private Double averageRating;
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "savingsIdeas")
+    private Set<IdeasRating> ratingList;
+
+
+
     //    kategoria
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "savingIdeasAndCategoriesIdList",
@@ -50,14 +59,21 @@ public class SavingsIdeas {
 
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "savingIdeasAndTypeOfCostsIdList",
+    @JoinTable(name = "saving_ideas_and_type_of_costs_id_list",
             joinColumns =
-            @JoinColumn(name = "savingIdea_id"),
-            inverseJoinColumns = @JoinColumn(name = "typeOfCosts_id")
+            @JoinColumn(name = "saving_idea_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_of_costs_id")
     )
     private Set<TypeOfCosts> typeOfCosts;
 
-
+    @Nullable
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "list_of_sent_savings_ideas",
+            joinColumns =
+            @JoinColumn(name = "savings_idea_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private UserApp sender;
 
 
 

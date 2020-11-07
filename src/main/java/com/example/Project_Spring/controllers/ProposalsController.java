@@ -70,6 +70,7 @@ public class ProposalsController {
     @GetMapping("/account-menu/account-proposals")
     public String accountPrivateMessages(ModelMap model) {
 
+        model.addAttribute("current_logged_user", customUserService.getLoggedUser());
         model.addAttribute("proposals_list", proposalService.findAllProposals());
 
         return "account-menu/account-proposals";

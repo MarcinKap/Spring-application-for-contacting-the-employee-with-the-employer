@@ -29,17 +29,9 @@ public class NewsServices {
     }
 
     public List<News> findAllNews(){
-//        List<News> newsList = newsRepository.newsList();
-//        for (int i = 0; i <newsList.size() ; i++) {
-//            System.out.println("costam");
-//            System.out.println(newsList.get(i).getText());
-//        }
-
-
         return newsRepository.findAll();
     }
     public List<News> findAllNewsSortedByDate(){
-
         return newsRepository.findAll(Sort.by(Sort.Direction.DESC, "createdDate"));
     }
 

@@ -3,8 +3,10 @@ package com.example.Project_Spring.controllers;
 import com.example.Project_Spring.mappers.ForumMessagesMapper;
 import com.example.Project_Spring.mappers.TopicMapper;
 import com.example.Project_Spring.models.ForumMessagesDto;
+import com.example.Project_Spring.models.Topic;
 import com.example.Project_Spring.models.TopicDto;
 import com.example.Project_Spring.security.CustomUserService;
+import com.example.Project_Spring.security.UserApp;
 import com.example.Project_Spring.security.UserAppRepository;
 import com.example.Project_Spring.services.ForumMessagesService;
 import com.example.Project_Spring.services.TopicServices;
@@ -32,61 +34,52 @@ public class ForumController {
 
     @GetMapping("/forum/forum-main-page")
     public String forumMainPage(Model model) {
-
         model.addAttribute("all_posts", forumMessagesService.getNumberOfMessages());
-        model.addAttribute("threads", topicServices.getForumThreads());
+        model.addAttribute("threads", topicServices.findAllTopics());
         model.addAttribute("currentLoggedUserId", customUserService.getLoggedUsersId());
-
         return "forum/forum-main-page";
     }
 
-
-    //    GŁÓWNE MENU TEMATÓW
     @PostMapping("/forum/forum-thread-creator")
     public String forumThreadCreator(Model model,
                                      @RequestParam(value = "thread") String thread,
                                      @RequestParam(value = "thread_text") String threadText) {
 
-        String creatorName = customUserService.getLoggedUserName();
-        Long creatorId = customUserService.getLoggedUsersId();
+        UserApp currentLoggedUser = customUserService.getLoggedUser();
 
         TopicDto topicDto = TopicDto.builder()
                 .topic(thread)
-                .senderId(creatorId)
-                .creatorName(creatorName)
+                .text(threadText)
                 .dateOfCreation(LocalDateTime.now())
-                .forumTopic(true)
-                .topicFirstMsg(threadText)
+                .sender(currentLoggedUser)
                 .build();
         topicServices.saveTopic(topicMapper.reverseMap(topicDto));
 
+
+
         Long topicId = topicServices.getTopicByText(thread).getId();
 
-//        ForumMessagesDto forumMessagesDto = ForumMessagesDto.builder()
-//                .senderId(creatorId)
-//                .textMsg(threadText)
-//                .topic(thread)
-//                .id_topic(topicId)
-//                .createdDate(LocalDateTime.now())
-//                .nameSender(customUserService.getLoggedUserName())
-//                .build();
-//        forumMessagesService.saveMessage(forumMessagesMapper.reverseMap(forumMessagesDto));
+        System.out.println(currentLoggedUser.getName());
+        System.out.println("Dodanie topic");
+
 
         return "redirect:/forum/forum-main-page";
     }
 
 
-    //    POSZCZEGÓLNE TEMATY
     @GetMapping("/forum/forum-thread")
     public String forumThread(Model model,
-                              @RequestParam(value = "topicId") Long topicId) {
+                              @RequestParam(value = "topic") Long topicId) {
 
-        model.addAttribute("currentLoggedUserId", customUserService.getLoggedUsersId());
+
+
+        model.addAttribute("currentLoggedUser", customUserService.getLoggedUsersId());
         model.addAttribute("topic", topicServices.getTopicById(topicId));
-        model.addAttribute("forumMessages", forumMessagesService.getForumMessagesByTopicId(topicId));
-
         return "forum/forum-thread";
     }
+
+
+
 
 
     //    ZAPISYWANIE POSTÓW
@@ -97,15 +90,13 @@ public class ForumController {
     ) {
 
 
-        Long creatorId = customUserService.getLoggedUsersId();
-
+//      Long creatorId = customUserService.getLoggedUsersId();
 
         ForumMessagesDto forumMessagesDto = ForumMessagesDto.builder()
-                .senderId(creatorId)
+                .sender(customUserService.getLoggedUser())
+                .topic(topicServices.getTopicById(topicId))
                 .textMsg(messageText)
-                .id_topic(topicId)
                 .createdDate(LocalDateTime.now())
-                .nameSender(customUserService.getLoggedUserName())
                 .build();
         forumMessagesService.saveMessage(forumMessagesMapper.reverseMap(forumMessagesDto));
 
@@ -113,7 +104,7 @@ public class ForumController {
 
         topicServices.updateNumberOfForumMessages(topicId);
 
-        return "redirect:/forum/forum-thread?topicId=" + topicId;
+        return "redirect:/forum/forum-thread?topic=" + topicId;
     }
 
 
@@ -123,13 +114,17 @@ public class ForumController {
                                 @RequestParam(value = "topicId") Long topicId) {
 
 
-        if(customUserService.getLoggedUsersId().equals(forumMessagesService.getForumMessageById(messageId).get().getSenderId())) {
+
+        if(customUserService.getLoggedUsersId().equals(forumMessagesService.getForumMessageById(messageId).get().getSender().getId())) {
             forumMessagesService.deleteForumMessageById(messageId);
             topicServices.updateNumberOfForumMessages(topicId);
         }
 
-        return "redirect:/forum/forum-thread?topicId=" + topicId;
+        return "redirect:/forum/forum-thread?topic=" + topicId;
     }
+
+
+
 
     @GetMapping("/deleteThread")
     public String deleteThread(Model model,

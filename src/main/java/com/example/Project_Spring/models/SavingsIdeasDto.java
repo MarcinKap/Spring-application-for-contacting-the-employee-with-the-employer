@@ -1,6 +1,7 @@
 package com.example.Project_Spring.models;
 
 
+import com.example.Project_Spring.security.UserApp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class SavingsIdeasDto {
     private Set<TypeOfCosts> typeOfCosts;
     private LocalDateTime dateOfCreation;
     private Double averageRating;
-
+    private Set<IdeasRating> ratingList;
+    private UserApp sender;
 
 }

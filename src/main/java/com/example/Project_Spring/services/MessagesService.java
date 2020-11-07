@@ -2,14 +2,16 @@ package com.example.Project_Spring.services;
 
 import com.example.Project_Spring.mappers.MessagesMapper;
 import com.example.Project_Spring.models.Messages;
+import com.example.Project_Spring.models.MessagesDto;
 import com.example.Project_Spring.repositories.MessagesRepository;
+import com.example.Project_Spring.security.CustomUserService;
+import com.example.Project_Spring.security.UserApp;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.security.MessageDigest;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -18,33 +20,36 @@ public class MessagesService {
 
     MessagesMapper messagesMapper;
     MessagesRepository messageRepository;
+    CustomUserService customUserService;
+
 
     public Messages saveMessage(Messages messages) {
         return messageRepository.save(messages);
     }
 
 
-    public List<Messages> getMessagesByRecipientId(Long id) {
-        return messageRepository.findMessagesByRecipientId(id);
+
+
+    public List<Messages> findMessagesByUserApp(UserApp userApp){
+        return messageRepository.findMessagesBySender(userApp);
     }
 
-    public List<Messages> getMessagesBySenderId(Long id) {
-        return messageRepository.findMessagesBySenderId(id);
+
+    public MessagesDto createMessage(String textMsg, Long recipientId ){
+
+        MessagesDto messagesDto = MessagesDto.builder()
+                .textMsg(textMsg)
+                .createdDate(LocalDateTime.now())
+                .sender(customUserService.getLoggedUser())
+                .recipient(customUserService.findUserById(recipientId))
+                .build();
+
+        return messagesDto;
     }
 
 
-//    public List<Messages> getMessagesByTopicId(Long id) {
-//        return messageRepository.findMessagesByTopicId(id);
-//    }
 
-    public List<Messages> getMessagesBySenderAndReceipientId(Long id, Long currentUserId) {
-        List<Messages> messagesList = new ArrayList<>();
-        messagesList.addAll(messageRepository.findMessagesByRecipientIdAndSenderId(id, currentUserId));
-//        messagesList.addAll(messageRepository.findMessagesByRecipientIdAndSenderId(currentUserId, id));
-        System.out.println("Lista wiadomości" + messagesList.size());
 
-        return messagesList;
-    }
 
 
     public boolean deleteMessageById(Long id) {
@@ -53,14 +58,30 @@ public class MessagesService {
     }
 
 
-    public Set<Long> getUniqueIdRecipientAndSender(Long id) {
-        Set<Long> x = messageRepository.findRecipientIdBySenderId(id);
-        Set<Long> y = messageRepository.findSenderIdByRecipientId(id);
-        Set<Long> z = new HashSet<>();
-        z.addAll(y);
-        z.addAll(x);
-        return z;
+    public List<Messages> getMessagesBySenderAndReceipientId(UserApp friend, UserApp currentLoggedUser) {
+        Set<Messages> messagesSet = new HashSet<>();
+
+        Set<Messages> sentMessages = currentLoggedUser.getSentMessagesList();
+        for (Messages message: sentMessages
+             ) {
+            if(message.getRecipient().equals(friend))
+                messagesSet.add(message);
+        }
+        Set<Messages> receivedMessages = currentLoggedUser.getReceivedMessagesList();
+        for (Messages message: receivedMessages
+        ) {
+            if(message.getSender().equals(friend))
+                messagesSet.add(message);
+        }
+
+
+        List<Messages> messagesList = new ArrayList<>(messagesSet);
+
+        messagesList.sort(Comparator.comparing(Messages::getCreatedDate));
+
+        return messagesList;
     }
+
 
 
 }

@@ -12,7 +12,7 @@
     <section class="mb-4">
         <div class="wrapper wrapper-content animated fadeInRight page-title">
             <!--Section heading-->
-            <h2 class="h1-responsive font-weight-bold my-4 ">Aktualności</h2>
+            <h2  class="h1-responsive font-weight-bold my-4 ">Aktualności</h2>
         </div>
         <div class="row">
         </div>
@@ -28,7 +28,7 @@
     <div class="row">
 
         <div class="col-lg-12 mx-auto">
-            <a href="/news/form-for-adding-a-news" class="btn btn-primary" style="margin-bottom: 5px">Nowa
+            <a th:if="${#request.isUserInRole('ADMIN')}" href="/news/form-for-adding-a-news" class="btn btn-primary" style="margin-bottom: 5px">Nowa
                 wiadomość</a>
             <!-- Timeline -->
 

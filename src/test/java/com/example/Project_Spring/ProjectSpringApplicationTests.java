@@ -1,5 +1,6 @@
 package com.example.Project_Spring;
 
+import com.example.Project_Spring.services.MessagesService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,7 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ProjectSpringApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void test() {
+
+
+
 	}
 
 }

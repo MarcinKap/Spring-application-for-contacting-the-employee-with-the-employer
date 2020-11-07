@@ -22,18 +22,18 @@ public class ForumMessagesService {
     }
 
 
-    public List<ForumMessages> getForumMessagesByRecipientId(Integer id) {
-        return forumMessagesRepository.findMessagesByRecipientId(id);
-    }
-
-    public List<ForumMessages> getForumMessagesBySenderId(Integer id) {
-        return forumMessagesRepository.findMessagesBySenderId(id);
-    }
-
-
-    public List<ForumMessages> getForumMessagesByTopicId(Long id) {
-        return forumMessagesRepository.findMessagesByTopicId(id);
-    }
+//    public List<ForumMessages> getForumMessagesByRecipientId(Integer id) {
+//        return forumMessagesRepository.findMessagesByRecipientId(id);
+//    }
+//
+//    public List<ForumMessages> getForumMessagesBySenderId(Integer id) {
+//        return forumMessagesRepository.findMessagesBySenderId(id);
+//    }
+//
+//
+//    public List<ForumMessages> getForumMessagesByTopicId(Long id) {
+//        return forumMessagesRepository.findMessagesByTopicId(id);
+//    }
 
     public Optional<ForumMessages> getForumMessageById(Long id){
         return forumMessagesRepository.findById(id);
@@ -45,9 +45,9 @@ public class ForumMessagesService {
 
     }
 
-    public int getNumberOfForumMessagesByTopicId(Long id){
-        return forumMessagesRepository.findNumberOfForumMessagesByTopicId(id);
-    }
+//    public int getNumberOfForumMessagesByTopicId(Long id){
+//        return forumMessagesRepository.findNumberOfForumMessagesByTopicId(id);
+//    }
 
     public int getNumberOfMessages(){
         return forumMessagesRepository.countNumberOfForumMessages();

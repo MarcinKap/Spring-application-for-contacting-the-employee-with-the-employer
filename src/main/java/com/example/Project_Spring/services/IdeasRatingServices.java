@@ -4,6 +4,7 @@ package com.example.Project_Spring.services;
 import com.example.Project_Spring.models.IdeasRating;
 import com.example.Project_Spring.models.SavingsIdeas;
 import com.example.Project_Spring.repositories.IdeasRatingRepository;
+import com.example.Project_Spring.security.CustomUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +17,7 @@ public class IdeasRatingServices {
 
     IdeasRatingRepository ideasRatingRepository;
     SavingsIdeasServices savingsIdeasServices;
-
-    public IdeasRating findIdeaRatingByUserIdAndIdeaId (Long userId, Long ideaId){
-
-
-        return ideasRatingRepository.findIdeasRatingByUserIdAndAndIdeaId(userId, ideaId);
-    }
+    CustomUserService customUserService;
 
 
     public IdeasRating updateOrSaveIdeaRating(Long userId, Long ideaId, int rating ){
@@ -32,39 +28,48 @@ public class IdeasRatingServices {
         System.out.println("ideaId" + ideaId);
         System.out.println("rating " + rating);
         return Optional
-                .ofNullable(ideasRatingRepository.findIdeasRatingByUserIdAndAndIdeaId(userId, ideaId))
+                .ofNullable(ideasRatingRepository.findIdeasRatingById(ideaId))
                 .map(i -> {
-                   i.setIdeaId(ideaId);
-                   i.setUserId(userId);
+                   i.setSavingsIdeas(savingsIdeasServices.findSavingIdeaById(ideaId));
+                   i.setEvaluator(customUserService.findUserById(userId));
                    i.setRating(rating);
                    return ideasRatingRepository.save(i);
                 })
                 .orElse(null);
     }
 
-    public void SaveIdeaRating(Long userId, Long ideaId, int rating ){
+    public void SaveIdeaRating(Long ideaId, int rating ){
+
+        System.out.println("zapis ratingu");
 
 
-
-        IdeasRating findedIdeasRating = findIdeaRatingByUserIdAndIdeaId(userId,ideaId);
-
+        IdeasRating findedIdeasRating = ideasRatingRepository.findIdeasRatingById(ideaId);
+        SavingsIdeas savingsIdeas = savingsIdeasServices.findSavingIdeaById(ideaId);
 
         if(findedIdeasRating != null){
-            findedIdeasRating.setRating(rating);
 
+            System.out.println("1");
+            findedIdeasRating.setRating(rating);
             ideasRatingRepository.save(findedIdeasRating);
         }else{
+            System.out.println("2");
             IdeasRating ideasRating = new IdeasRating();
 
             ideasRating.setRating(rating);
-            ideasRating.setIdeaId(ideaId);
-            ideasRating.setUserId(userId);
+            ideasRating.setSavingsIdeas(savingsIdeas);
+            ideasRating.setEvaluator(customUserService.getLoggedUser());
             ideasRatingRepository.save(ideasRating);
         }
 
-//        update średniej w tablicy saving ideas
 
-        Double averageRating = ideasRatingRepository.findAverageRating(ideaId);
+//        Double averageRating = savingsIdeas.getRatingList().stream().filter(o -> o.getRating() > 10).mapToDouble(o -> o.getRating()).sum();
+        double averageRating = 0.0;
+        for (IdeasRating ideasRating: savingsIdeas.getRatingList()
+             ) {
+            averageRating+=ideasRating.getRating();
+        }
+        averageRating = averageRating/savingsIdeas.getRatingList().size();
+
         SavingsIdeas updatedSavingIdea = savingsIdeasServices.findSavingIdeaById(ideaId);
         updatedSavingIdea.setAverageRating(averageRating);
         savingsIdeasServices.updateSavingsIdea(updatedSavingIdea);

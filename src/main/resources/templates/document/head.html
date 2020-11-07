@@ -161,21 +161,21 @@
 
         var x = null;
 
-        function updateMessagesList(param) {
+        function updateMessagesList(friend) {
 
-            x = param;
+            x = friend;
             $.ajax({
 
-                url: showMessages(param),
+                url: showMessages(friend),
                 success: function () {
 
                    var interval = setInterval(function () {
                         // var id = document.getElementById('recipientId').value;
-                       if(x!==param){
+                       if(x!==friend){
                            clearInterval(interval);
 
                        }else{
-                           updateMessages(param);
+                           updateMessages(friend);
                        }
 
 
@@ -187,15 +187,15 @@
 
         }
 
-        function showMessages(param) {
+        function showMessages(friend) {
 
-            $.get("show-messages", {friendId: param}).done(function (fragment) { // get from controller
+            $.get("show-messages", {friendId: friend}).done(function (fragment) { // get from controller
                 $("#showMessages").replaceWith(fragment); // update snippet of page
             });
         }
 
-        function updateMessages(param) {
-            $.get("update-messages", {friendId: param}).done(function (fragment) { // get from controller
+        function updateMessages(friend) {
+            $.get("update-messages", {friendId: friend}).done(function (fragment) { // get from controller
                 $("#updateMessages").replaceWith(fragment); // update snippet of page
             });
         }

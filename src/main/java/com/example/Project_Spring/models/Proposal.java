@@ -1,5 +1,6 @@
 package com.example.Project_Spring.models;
 
+import com.example.Project_Spring.security.UserApp;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -21,7 +22,13 @@ public class Proposal {
     private Long id;
 
     @Nullable
-    private Long senderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "list_of_sent_proposals",
+            joinColumns =
+            @JoinColumn(name = "proposal_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private UserApp sender;
     @Nullable
     private String senderEmail;
     @Nullable

@@ -53,10 +53,10 @@ public class SavingsIdeasController {
     public void saveRating(@RequestParam("value") int rating,
                            @RequestParam("id") Long savingsIdeaId) {
 
-        Long userId = customUserService.getLoggedUsersId();
 
-        ideasRatingServices.SaveIdeaRating(userId, savingsIdeaId, rating);
-//teraz powinien być update średniej właśnie tego pomyslu
+    //teraz powinien być update średniej właśnie tego pomyslu
+        ideasRatingServices.SaveIdeaRating(savingsIdeaId, rating);
+
 
 
     }

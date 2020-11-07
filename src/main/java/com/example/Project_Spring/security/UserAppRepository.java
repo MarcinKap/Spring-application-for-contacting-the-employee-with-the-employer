@@ -1,5 +1,6 @@
 package com.example.Project_Spring.security;
 
+import com.example.Project_Spring.models.Messages;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -24,5 +25,11 @@ public interface UserAppRepository extends JpaRepository<UserApp, Integer> {
 //    Set<UserApp> findUsersAppById(Set<Long> idList);
 
     List<UserApp> findUserAppsByIdIsIn(Set<Long> idList);
+
+
+    @Query("select u from UserApp u where u.sentMessagesList = ?1")
+    List<UserApp> findUserAppsBySentMessagesList(Set<Messages> sentMessagesList);
+
+
 
 }

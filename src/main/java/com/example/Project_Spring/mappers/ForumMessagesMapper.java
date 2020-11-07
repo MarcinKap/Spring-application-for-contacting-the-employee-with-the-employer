@@ -14,14 +14,10 @@ public class ForumMessagesMapper implements Mapper<ForumMessages, ForumMessagesD
         return ForumMessagesDto
                 .builder()
                 .id(from.getId())
-                .senderEmail(from.getSenderEmail())
-                .recipientId(from.getRecipientId())
-                .senderId(from.getSenderId())
                 .textMsg(from.getTextMsg())
                 .topic(from.getTopic())
-                .id_topic(from.getTopicId())
                 .createdDate(from.getCreatedDate())
-                .nameSender(from.getNameSender())
+                .sender(from.getSender())
                 .build();
     }
     @Override
@@ -29,14 +25,10 @@ public class ForumMessagesMapper implements Mapper<ForumMessages, ForumMessagesD
         return ForumMessages
                 .builder()
                 .id(to.getId())
-                .senderEmail(to.getSenderEmail())
-                .recipientId(to.getRecipientId())
-                .senderId(to.getSenderId())
                 .textMsg(to.getTextMsg())
                 .topic(to.getTopic())
-                .topicId(to.getId_topic())
+                .sender(to.getSender())
                 .createdDate(to.getCreatedDate())
-                .nameSender(to.getNameSender())
                 .build();
     }
 

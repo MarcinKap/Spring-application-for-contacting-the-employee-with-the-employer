@@ -1,5 +1,10 @@
 package com.example.Project_Spring.security;
 
+import com.example.Project_Spring.models.ForumMessages;
+import com.example.Project_Spring.models.IdeasRating;
+import com.example.Project_Spring.models.Messages;
+import com.example.Project_Spring.models.Topic;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,8 +43,42 @@ public class UserApp {
     )
     private Set<Role> roles = new HashSet<>();
 
+
+//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipient")
+//    private Set<Messages> receivedMessagesList;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
+    private Set<Messages> sentMessagesList;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evaluator")
+    private Set<IdeasRating> listOfIssuedRatings;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipient")
+    private Set<Messages> receivedMessagesList;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
+    private Set<ForumMessages> sentForumMessagesList;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
+    private Set<Topic> sentTopicsList;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
+    private Set<Messages> sentProposalsList;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
+    private Set<Topic> sentSavingsIdeas;
+
     @Transient
     private String mainRole;
+
 
 
     public UserApp(UserApp userApp) {
@@ -48,5 +87,7 @@ public class UserApp {
         this.password = userApp.getPassword();
         this.active = userApp.getActive();
         this.roles = userApp.getRoles();
+//        this.receivedMessagesList = userApp.getReceivedMessagesList();
+//        this.sentMessagesList = userApp.getSentMessagesList();
     }
 }

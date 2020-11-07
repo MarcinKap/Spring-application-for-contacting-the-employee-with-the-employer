@@ -1,5 +1,6 @@
 package com.example.Project_Spring.models;
 
+import com.example.Project_Spring.security.UserApp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,9 +17,11 @@ public class MessagesDto {
 
 
     private Long id;
-    private Long senderId;
-    private Long recipientId;
+//    private Long senderId;
+//    private Long recipientId;
     private String textMsg;
     private LocalDateTime createdDate;
+    private UserApp recipient;
+    private UserApp sender;
 
 }
