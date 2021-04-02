@@ -3,6 +3,7 @@ package com.example.Project_Spring.models;
 
 import com.example.Project_Spring.security.UserApp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -34,12 +35,13 @@ public class SavingsIdeas {
 
     private Double averageRating;
 
+    @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "savingsIdeas")
     private Set<IdeasRating> ratingList;
 
 
-
+    @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
     //    kategoria
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "savingIdeasAndCategoriesIdList",
@@ -49,6 +51,7 @@ public class SavingsIdeas {
     )
     private SavingsIdeasCategories savingsIdeasCategories;
 
+    @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "savingIdeasAndWorkAreasIdList",
             joinColumns =
@@ -57,7 +60,7 @@ public class SavingsIdeas {
     )
     private WorkAreas workAreas;
 
-
+    @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "saving_ideas_and_type_of_costs_id_list",
             joinColumns =
@@ -66,6 +69,7 @@ public class SavingsIdeas {
     )
     private Set<TypeOfCosts> typeOfCosts;
 
+    @JsonIgnore
     @Nullable
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "list_of_sent_savings_ideas",

@@ -32,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll() //zezwol na dostep bez autoryzacji na powyzsze linki
                 .and() //spojnik pozwalajacy wrocic do konfiguracji obiektu http
                 .formLogin() // włączenie opcji mapowania logowania strona html
-
                 .loginPage("/login") //na @GetMapping w LoginController
                 //konfiguracja linku pod ktorym aplikacja bedzie odbierac dane logowania
                 /** formularz - atrybut w <form action="/signin">*/

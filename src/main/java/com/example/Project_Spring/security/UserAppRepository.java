@@ -31,5 +31,4 @@ public interface UserAppRepository extends JpaRepository<UserApp, Integer> {
     List<UserApp> findUserAppsBySentMessagesList(Set<Messages> sentMessagesList);
 
 
-
 }

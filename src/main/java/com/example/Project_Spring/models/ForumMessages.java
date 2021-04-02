@@ -23,11 +23,12 @@ public class ForumMessages {
     private LocalDateTime createdDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "list_of_sent_forum_messages_by_user",
-            joinColumns =
-            @JoinColumn(name = "forum_message_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @JoinColumn(name = "list_of_sent_forum_messages_by_user")
+//    @JoinTable(name = "list_of_sent_forum_messages_by_user",
+//            joinColumns =
+//            @JoinColumn(name = "forum_message_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id")
+//    )
     private UserApp sender;
 
     @ManyToOne(fetch = FetchType.LAZY)

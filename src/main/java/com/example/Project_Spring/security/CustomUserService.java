@@ -174,57 +174,16 @@ public class CustomUserService implements UserDetailsService {
       }
 
 
+      public boolean logIn(String email, String password){
+          Optional<UserApp> userApp = Optional.ofNullable(userAppRepository.findUserAppByEmail(email));
+          if (userApp!= null){
+              if (passwordEncoder.matches(password, userApp.get().getPassword())){
+                  return true;
+              }
+          }
+          return false;
 
-
-
-
-//    public List<UserApp> getUserAppListConnectedWithMessages(UserApp currentLoggedUser) {
-////1
-//        //        Zdobycie listy wysłanych wiadmości
-//        Set<Messages> sended = currentLoggedUser.getSentMessagesList();
-////        Zdobycie listy użytkowników którzy otrzymali te wiadomości poprzez messageService
-//        Set<Long> friendsId = messagesService.
-//        System.out.println("lista1 trololol");
-//
-//
-////2
-////        Zdobycie listy otrzymanych wiadomości
-//        Set<Messages> received = currentLoggedUser.getSentMessagesList();
-////          Zdobycie listy użytkowników którzy wysłali te wiadomości (SENDER)
-//
-//
-//
-//
-////        List<UserApp> userAppList = new ArrayList<>();
-//        System.out.println("trolol2");
-//        System.out.println(userAppList.size());
-//
-//
-//
-//
-////        for (Messages message : received
-////             ) {
-////            message.getSender()
-////
-////        }
-////        messagesService.findMessagesByUserApp(currentLoggedUser);
-////        userAppList.addAll(userAppRepository.findUserAppsBySentMessagesList(currentLoggedUser));
-//
-//
-//
-//
-//
-//
-//
-//
-//
-////        List<UserApp> userAppList = new ArrayList<>(userAppRepository.findUserAppsByIdIsIn(idList));
-//
-//        return userAppList;
-//    }
-
-
-
+      }
 
 }
 
