@@ -19,7 +19,7 @@ public class ProposalsRestController {
     private CustomUserService customUserService;
     private ProposalService proposalService;
 
-    @PostMapping("/sendMessageRest")
+    @PostMapping("/sendQuestionRest")
     public String addMessage(Model model,
                              @org.springframework.lang.Nullable @RequestParam(value = "nameAndSurname") String nameAndSurname,
                              @org.springframework.lang.Nullable @RequestParam(value = "senderEmail") String senderEmail,
@@ -43,6 +43,23 @@ public class ProposalsRestController {
 
 
         proposalService.saveProposal(topic, text_msg, senderId, senderEmail, nameAndSurname);
+
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/rest/sendQuestionRestForLoggedUser")
+    public String addMessageForLoggedUser(Model model,
+                                          @org.springframework.lang.Nullable @RequestParam(value = "senderEmail") String senderEmail,
+                                          @org.springframework.lang.Nullable @RequestParam(value = "subject") String topic,
+                                          @RequestParam(value = "textMsg") String text_msg
+    ) {
+
+
+        UserApp userApp = customUserService.findUserByEmail(senderEmail);
+
+
+        proposalService.saveProposal(topic, text_msg, userApp.getId(), null , null);
 
 
         return "redirect:/";

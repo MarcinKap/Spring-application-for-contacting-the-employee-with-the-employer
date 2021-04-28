@@ -1,27 +1,20 @@
 package com.example.Project_Spring.controllers.restControllers;
 
 
-import com.auth0.jwt.interfaces.Claim;
+import com.example.Project_Spring.models.UserRest;
 import com.example.Project_Spring.security.CustomUserService;
 //import com.example.Project_Spring.security.JwtGenerator;
 import com.example.Project_Spring.security.JwtGenerator;
 import com.example.Project_Spring.security.UserApp;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.Key;
 import java.sql.Date;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -29,9 +22,9 @@ import java.util.Map;
 public class LoginRestController {
     CustomUserService customUserService;
 
-
-    @PostMapping("/restLogIn")
-   public String restLogin (@RequestParam(value = "email") String email, @RequestParam(value = "password") String password){
+    @RequestMapping(method = RequestMethod.GET , value = {"/restLogIn"})
+//    @GetMapping("/restLogIn")
+   public UserRest restLogin (Model model, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password){
 //        SecretKey keys = Keys.secretKeyFor(SignatureAlgorithm.HS512);
         SecretKey keys = JwtGenerator.getInstance().getKey();
 
@@ -39,13 +32,28 @@ public class LoginRestController {
         Long now = System.currentTimeMillis();
 
         if (customUserService.logIn(email, password)){
-            return Jwts.builder()
+            UserApp userApp = customUserService.findUserByEmail(email);
+            String token = Jwts.builder()
                     .setSubject(email) // 1
                     .claim("roles", "user") // 2
                     .setIssuedAt(new Date(now)) // 3
-                    .setExpiration(new Date(now + 100000)) // 4
-                    .signWith(keys, SignatureAlgorithm.HS512)
-                    .compact(); // 5
+                    .setExpiration(new Date(now + 1000000)) // 4
+                    .signWith(keys, SignatureAlgorithm.HS512)// 5)
+                    .compact();
+
+            UserRest userRest = UserRest.builder()
+                    .email(userApp.getEmail())
+                    .name(userApp.getName())
+                    .lastName(userApp.getLastName())
+                    .role(userApp.getMainRole())
+                    .token(token)
+                    .id(userApp.getId())
+                    .build();
+
+
+
+            return userRest;
+
         }
         return null;
 

@@ -22,20 +22,17 @@ public class HomeRestController {
 
     NewsServices newsServices;
 
-    @RequestMapping(method = RequestMethod.GET , value = {"/123"})
+    @RequestMapping(method = RequestMethod.GET , value = {"/restNews"})
     public List<News> homePage(Model model) {
 
         return newsServices.findAllNewsSortedByDate();
 
-//            return new ResponseEntity<>(news, HttpStatus.OK);
-//
-//
-//        } catch (Exception e){
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
     }
 
-
+    @RequestMapping(method = RequestMethod.GET , value = {"/rest/news"})
+    public List<News> homePageForLoggedUsers(Model model) {
+        return newsServices.findAllNewsSortedByDate();
+    }
 
 
 }

@@ -54,7 +54,7 @@ public class SavingsIdeasController {
                            @RequestParam("id") Long savingsIdeaId) {
 
 
-    //teraz powinien być update średniej właśnie tego pomyslu
+        //teraz powinien być update średniej właśnie tego pomyslu
         ideasRatingServices.SaveIdeaRating(savingsIdeaId, rating);
 
 
