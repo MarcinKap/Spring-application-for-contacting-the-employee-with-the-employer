@@ -23,11 +23,6 @@ public class IdeasRatingServices {
 
     public IdeasRating updateOrSaveIdeaRating(Long userId, Long ideaId, int rating ){
 
-        System.out.println("asdasdasdasd");
-//        System.out.println(userId + ideaId + rating);
-        System.out.println("user id " + userId);
-        System.out.println("ideaId" + ideaId);
-        System.out.println("rating " + rating);
         return Optional
                 .ofNullable(ideasRatingRepository.findIdeasRatingById(ideaId))
                 .map(i -> {

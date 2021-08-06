@@ -35,7 +35,6 @@ public class ProposalsRestController {
 
 
         if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserApp userApp = customUserService.getLoggedUser();
             senderId = userApp.getId();
             nameAndSurname = userApp.getName() + " " + userApp.getLastName();

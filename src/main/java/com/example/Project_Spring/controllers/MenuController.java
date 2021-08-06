@@ -40,7 +40,7 @@ public class MenuController {
 
     @GetMapping("/survey-selected")
     public String survey_selected(Model model, @Param("marks") String marks) {
-        System.out.println(marks);
+
         return "surveys package/survey_selected";
     }
 

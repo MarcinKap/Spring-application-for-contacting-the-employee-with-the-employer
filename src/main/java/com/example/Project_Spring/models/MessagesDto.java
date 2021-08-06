@@ -17,8 +17,6 @@ public class MessagesDto {
 
 
     private Long id;
-//    private Long senderId;
-//    private Long recipientId;
     private String textMsg;
     private LocalDateTime createdDate;
     private UserApp recipient;

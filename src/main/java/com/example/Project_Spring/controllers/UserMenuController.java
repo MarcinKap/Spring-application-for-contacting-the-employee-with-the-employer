@@ -26,19 +26,8 @@ import java.time.LocalDateTime;
 @Controller
 @AllArgsConstructor
 public class UserMenuController {
-
-
-    private MessagesMapper messagesMapper;
-    private MessagesService messagesService;
-
     private UserAppRepository userAppRepository;
-
-    private TopicServices topicServices;
-    private TopicMapper topicMapper;
-
-
     private CustomUserService customUserService;
-
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/account-menu/account-index")
@@ -52,23 +41,15 @@ public class UserMenuController {
         return "account-menu/account-questions";
     }
 
-
-
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/account-menu/account-sended-messages")
     public String accountSendedMessages(Model model) {
-        Long id = customUserService.getLoggedUsersId();
-//        model.addAttribute("sended_messages", messagesService.getMessagesBySenderId(id));
         return "account-menu/account-sended-messages";
-
     }
-
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/account-menu/account-data")
     public String accountData(Model model) {
-
-
         model.addAttribute("current_logged_user", customUserService.getLoggedUser());
         return "account-menu/account-data";
     }
@@ -79,26 +60,8 @@ public class UserMenuController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserApp userApp = (UserApp) authentication.getPrincipal();
         UserApp currentUser = userAppRepository.findUserAppById(userApp.getId());
-
         model.addAttribute("user", currentUser);
         return "account-menu/admin-panel";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

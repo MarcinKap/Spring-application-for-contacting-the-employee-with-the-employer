@@ -37,12 +37,5 @@ public class Survey {
     )
     private Question question;
 
-//    public Survey(Survey survey) {
-//        this.id = survey.getId();
-//        this.lista = survey.getLista();
-//        this.title = survey.getTitle();
-//
-//    }
-
 
 }

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @AllArgsConstructor
 public class UserController {
 
-    private UserAppRepository userAppRepository;
-    private CustomUserService customUserService;
-    private PasswordEncoder passwordEncoder;
+    private final UserAppRepository userAppRepository;
+    private final CustomUserService customUserService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/account-menu/account-data/password-change")
     public String changePasswordPage(Model model) {
@@ -26,12 +26,11 @@ public class UserController {
 
     @PostMapping("/password-change")
     public String changePassword(@RequestParam(value = "newPassword") String newPassword, @RequestParam(value = "newPasswordConfirmation") String newPasswordConfirmation, @RequestParam(value = "oldPassword") String oldPassword) {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserApp userApp = (UserApp) authentication.getPrincipal();
         UserApp currentUser = userAppRepository.findUserAppById(userApp.getId());
 
-        if (passwordEncoder.matches(oldPassword, currentUser.getPassword())==true && newPassword.equals(newPasswordConfirmation)){
+        if (passwordEncoder.matches(oldPassword, currentUser.getPassword()) && newPassword.equals(newPasswordConfirmation)){
                 customUserService.updateUserAppPassword(newPassword);
         }
         return "redirect:/account-menu/account-data";

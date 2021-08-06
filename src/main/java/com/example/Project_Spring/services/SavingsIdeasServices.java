@@ -28,12 +28,10 @@ public class SavingsIdeasServices {
 
 
     public SavingsIdeas savingsIdeasCompletingTheForm(SavingsIdeas savingsIdeas, Long workAreaId, Long categoryId) {
-
         savingsIdeas.setWorkAreas(workAreasServices.getWorkAreasById(workAreaId));
         savingsIdeas.setSavingsIdeasCategories(savingIdeasCategoriesService.getCategoryById(categoryId));
         savingsIdeas.setDateOfCreation(LocalDateTime.now());
         savingsIdeas.setSender(customUserService.getLoggedUser());
-
         return savingsIdeas;
     }
 

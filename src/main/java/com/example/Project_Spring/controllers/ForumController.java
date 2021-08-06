@@ -54,15 +54,7 @@ public class ForumController {
                 .sender(currentLoggedUser)
                 .build();
         topicServices.saveTopic(topicMapper.reverseMap(topicDto));
-
-
-
         Long topicId = topicServices.getTopicByText(thread).getId();
-
-        System.out.println(currentLoggedUser.getName());
-        System.out.println("Dodanie topic");
-
-
         return "redirect:/forum/forum-main-page";
     }
 
@@ -70,8 +62,6 @@ public class ForumController {
     @GetMapping("/forum/forum-thread")
     public String forumThread(Model model,
                               @RequestParam(value = "topic") Long topicId) {
-
-
 
         model.addAttribute("currentLoggedUser", customUserService.getLoggedUsersId());
         model.addAttribute("topic", topicServices.getTopicById(topicId));
@@ -88,10 +78,6 @@ public class ForumController {
                                    @RequestParam(value = "message_text") String messageText,
                                    @RequestParam(value = "topicId") Long topicId
     ) {
-
-
-//      Long creatorId = customUserService.getLoggedUsersId();
-
         ForumMessagesDto forumMessagesDto = ForumMessagesDto.builder()
                 .sender(customUserService.getLoggedUser())
                 .topic(topicServices.getTopicById(topicId))
@@ -99,11 +85,7 @@ public class ForumController {
                 .createdDate(LocalDateTime.now())
                 .build();
         forumMessagesService.saveMessage(forumMessagesMapper.reverseMap(forumMessagesDto));
-
-//        topicServices.updateNumberOfForumMessages(forumMessagesDto.getTopicId());
-
         topicServices.updateNumberOfForumMessages(topicId);
-
         return "redirect:/forum/forum-thread?topic=" + topicId;
     }
 
@@ -113,13 +95,10 @@ public class ForumController {
                                 @RequestParam(value = "messageId") Long messageId,
                                 @RequestParam(value = "topicId") Long topicId) {
 
-
-
         if(customUserService.getLoggedUsersId().equals(forumMessagesService.getForumMessageById(messageId).get().getSender().getId())) {
             forumMessagesService.deleteForumMessageById(messageId);
             topicServices.updateNumberOfForumMessages(topicId);
         }
-
         return "redirect:/forum/forum-thread?topic=" + topicId;
     }
 

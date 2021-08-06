@@ -16,13 +16,10 @@ import java.util.Set;
 @Builder
 public class QuestionDto {
 
-
     private Long id;
     private Long idInquiry;
 
 
-    //    AnswerOrInquiry inquiry;
-//    List<AnswerOrInquiry> answers;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     private Set<Survey> lista;

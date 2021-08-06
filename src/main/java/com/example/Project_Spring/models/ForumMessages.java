@@ -24,11 +24,6 @@ public class ForumMessages {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "list_of_sent_forum_messages_by_user")
-//    @JoinTable(name = "list_of_sent_forum_messages_by_user",
-//            joinColumns =
-//            @JoinColumn(name = "forum_message_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id")
-//    )
     private UserApp sender;
 
     @ManyToOne(fetch = FetchType.LAZY)

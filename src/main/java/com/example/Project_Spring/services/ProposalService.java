@@ -33,8 +33,6 @@ public class ProposalService {
               .creationDate(LocalDateTime.now())
               .readed(false)
               .build();
-
-      System.out.println("zapisywanie");
       proposalRepository.save(proposalMapper.reverseMap(proposalDto));
   }
 

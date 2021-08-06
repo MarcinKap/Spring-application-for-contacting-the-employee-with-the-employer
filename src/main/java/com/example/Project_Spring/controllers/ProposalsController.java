@@ -24,7 +24,6 @@ public class ProposalsController {
     private CustomUserService customUserService;
     private ProposalService proposalService;
 
-
     @GetMapping("/applications-and-needs")
     public String applications_and_needs(Model model) {
 
@@ -44,15 +43,10 @@ public class ProposalsController {
                              @org.springframework.lang.Nullable @RequestParam(value = "subject") String topic
     ) {
 
-
         Long senderId = null;
         String nameAndSurname = null;
-        System.out.println("uzytkownik");
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-
 
         if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserApp userApp = customUserService.getLoggedUser();
             senderId = userApp.getId();
             nameAndSurname = userApp.getName() + " " + userApp.getLastName();
@@ -87,26 +81,15 @@ public class ProposalsController {
         return mv;
     }
 
-
-    //    @PostMapping("/saveBook")
-//    public ResponseEntity<Object> addBook(@RequestParam Long id) {
-//        proposalService.updateProposalReadedParameter(id);
-//        ServiceResponse<Long> response = new ServiceResponse<Long>("success", id);
-//        return new ResponseEntity<Object>(response, HttpStatus.OK);
-//
-//    }
     @PostMapping("/saveBook")
     public ResponseEntity<Object> addBook(@RequestParam Long id) {
-        System.out.println("Zapisywanie");
         proposalService.updateProposalReadedParameter(id);
-        System.out.println("Zapisanie");
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", id);
         return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
 
     @GetMapping(value = "/event-count")
     public String getEventCount(ModelMap map) {
-        System.out.println("Metoda get");
         map.addAttribute("proposals_list", proposalService.findAllProposals());
 
         return "account-menu/account-proposals :: #eventCount";

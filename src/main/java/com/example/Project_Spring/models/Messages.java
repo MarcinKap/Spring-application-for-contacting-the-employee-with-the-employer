@@ -23,10 +23,6 @@ public class Messages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Nullable
-//    private Long senderId;
-//    @Nullable
-//    private Long recipientId;
     private String textMsg;
     @Nullable
     private LocalDateTime createdDate;

@@ -26,9 +26,5 @@ public class TypeOfCosts {
     @ManyToMany(mappedBy = "typeOfCosts")
     private Set<SavingsIdeas> savingsIdeas;
 
-//    @JsonIgnore
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<UserApp> users = new HashSet<>();
-
 
 }

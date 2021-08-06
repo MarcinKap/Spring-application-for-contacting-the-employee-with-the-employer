@@ -27,9 +27,9 @@ import java.util.Set;
 public class UserApp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(title = "user_id")
     private Long id;
-//    @Email
+
+    //    @Email
     private String email;
     private String password;
     private String name;
@@ -42,11 +42,6 @@ public class UserApp {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
-
-
-//    @JsonIgnore
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipient")
-//    private Set<Messages> receivedMessagesList;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
@@ -80,14 +75,11 @@ public class UserApp {
     private String mainRole;
 
 
-
     public UserApp(UserApp userApp) {
-        this.id=userApp.getId();
+        this.id = userApp.getId();
         this.email = userApp.getEmail();
         this.password = userApp.getPassword();
         this.active = userApp.getActive();
         this.roles = userApp.getRoles();
-//        this.receivedMessagesList = userApp.getReceivedMessagesList();
-//        this.sentMessagesList = userApp.getSentMessagesList();
     }
 }

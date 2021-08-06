@@ -25,31 +25,22 @@ public class NewsController {
     @GetMapping("/news/news-main-page")
     public String forumMainPage(Model model,
                                 @RequestParam(value = "id") Long id) {
-
-//        model.addAttribute("title", title);
         Optional<News> news = newsServices.findNewsById(id);
         model.addAttribute("news", news);
-
         return "news/news-main-page";
     }
 
     @GetMapping("/news/form-for-adding-a-news")
     public String formForAddingNews (Model model) {
-
         News news = new News();
         model.addAttribute("news", news);
-
-
         return "news/form-for-adding-a-news";
     }
 
     @PostMapping("/add-news")
     public String addSavingsIdea(@ModelAttribute News news) {
-
         news.setCreatedDate(LocalDateTime.now());
         newsServices.saveNews(news);
-
-
         return "redirect:/";
     }
 

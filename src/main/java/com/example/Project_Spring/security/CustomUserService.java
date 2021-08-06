@@ -21,8 +21,6 @@ public class CustomUserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
 
-    private MessagesService messagesService;
-
     public CustomUserService(UserAppRepository userAppRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userAppRepository = userAppRepository;
         this.passwordEncoder = passwordEncoder;
@@ -80,16 +78,7 @@ public class CustomUserService implements UserDetailsService {
         Optional
                 .ofNullable(userAppRepository.findUserAppById(userApp.getId()))
                 .map(c -> {
-//                        c.setId(currentUser.getId());
-//                        c.setEmail(currentUser.getEmail());
                     c.setPassword(passwordEncoder.encode(newPassword));
-//                        c.setRoles(currentUser.getRoles());
-//                        c.setActive(currentUser.getActive());
-//                        c.setAdresses(currentUser.getAdresses());
-//                        c.setCompanies_adresses(currentUser.getCompanies_adresses());
-//                        c.setLastName(currentUser.getLastName());
-//                        c.setTitle(currentUser.getTitle());
-
                     return userAppRepository.save(c);
                 })
                 .orElse(null);
@@ -150,22 +139,14 @@ public class CustomUserService implements UserDetailsService {
 
 
     public Set<UserApp> findUsersFriend(UserApp userApp){
-        System.out.println("Szukanie znajomych");
-
-
         Set<UserApp> userAppSet = new HashSet<>();
-
-//        Wiadomości wysłane przez użytkownika - szukamy odbiorcy
-        System.out.println(userApp.getName() + userApp.getLastName());
         Set<Messages> sendedMessages = userApp.getSentMessagesList();
-        System.out.println("wysłane wiadomosci " + sendedMessages.size());
         for (Messages message: sendedMessages
              ) {
             userAppSet.add(message.getRecipient());
         }
 //        Wiadomości odebrane przez użytkownika - szukamy osoby wysyłającej
         Set<Messages> receivedMessages = userApp.getReceivedMessagesList();
-        System.out.println("odebrane wiadomosci " + receivedMessages.size());
         for (Messages message: receivedMessages
         ) {
             userAppSet.add(message.getSender());;

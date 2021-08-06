@@ -13,19 +13,6 @@ import java.util.List;
 @Repository
 public interface ForumMessagesRepository extends JpaRepository<ForumMessages, Long> {
 
-//    @Query("select m from ForumMessages m where m.recipientId = ?1")
-//    List<ForumMessages> findMessagesByRecipientId(Integer id);
-//
-//    @Query("select m from ForumMessages m where m.senderId = ?1")
-//    List<ForumMessages> findMessagesBySenderId(Integer id);
-
-//    @Query("select m from ForumMessages m where m.topicId = ?1")
-//    List<ForumMessages> findMessagesByTopicId(Long id);
-
-//    @Query("select count(topicId) from ForumMessages m where m.topicId = ?1 ")
-//    int findNumberOfForumMessagesByTopicId(Long id);
-
-
     @Transactional
     @Modifying
     @Query("delete from ForumMessages m where m.id = ?1")

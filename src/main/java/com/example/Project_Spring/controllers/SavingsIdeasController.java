@@ -36,10 +36,6 @@ public class SavingsIdeasController {
         model.addAttribute("typesofCosts", typeOfCostsServices.getAllTypesOfCosts());
         SavingsIdeas savingsIdea = new SavingsIdeas();
         model.addAttribute("savingIdea", savingsIdea);
-//        private WorkArea workArea;
-//        private TypeOfCosts typeOfCosts;
-//
-//        System.out.println("srednia arytmetyczna" +  savingsIdeasServices.findAllSavingsIdeas().get(1).getAverageRating());
 
         model.addAttribute("savingIdeasList", savingsIdeasServices.findAllSavingsIdeas());
 
@@ -53,12 +49,8 @@ public class SavingsIdeasController {
     public void saveRating(@RequestParam("value") int rating,
                            @RequestParam("id") Long savingsIdeaId) {
 
-
         //teraz powinien być update średniej właśnie tego pomyslu
         ideasRatingServices.SaveIdeaRating(savingsIdeaId, rating);
-
-
-
     }
 
 
@@ -93,11 +85,6 @@ public class SavingsIdeasController {
         model.addAttribute("typesofCosts", typeOfCostsServices.getAllTypesOfCosts());
         SavingsIdeas savingsIdea = new SavingsIdeas();
         model.addAttribute("savingIdea", savingsIdea);
-//        private WorkArea workArea;
-//        private TypeOfCosts typeOfCosts;
-//
-//        System.out.println("srednia arytmetyczna" +  savingsIdeasServices.findAllSavingsIdeas().get(1).getAverageRating());
-
         model.addAttribute("savingIdeasList", savingsIdeasServices.findAllSavingsIdeas());
 
         return "savings-ideas/savings-ideas-form";

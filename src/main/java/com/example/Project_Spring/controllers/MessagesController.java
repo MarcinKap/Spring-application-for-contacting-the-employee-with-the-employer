@@ -63,9 +63,6 @@ public class MessagesController {
         Set<UserApp> friendsList = customUserService.findUsersFriend(currentLoggedUser);
         model.addAttribute("users_list", friendsList);
         model.addAttribute("messages", messagesService.getMessagesBySenderAndReceipientId(friend, currentLoggedUser));
-
-
-
         return "account-menu/account-private-messages";
     }
 
@@ -73,11 +70,8 @@ public class MessagesController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping(value = "/show-messages")
     public String showMessages(Model model, @org.springframework.lang.Nullable  @RequestParam("friendId") Long friendId) {
-
         UserApp currentLoggedUser = customUserService.getLoggedUser();
         UserApp friend = customUserService.findUserById(friendId);
-
-
         model.addAttribute("friend", friend);
         model.addAttribute("current_logged_user", customUserService.getLoggedUser());
 /*
@@ -88,9 +82,6 @@ public class MessagesController {
         Set<UserApp> friendsList = customUserService.findUsersFriend(currentLoggedUser);
         model.addAttribute("users_list", friendsList);
         model.addAttribute("messages", messagesService.getMessagesBySenderAndReceipientId(friend, currentLoggedUser));
-
-
-
         return "/account-menu/account-private-messages :: #showMessages";
     }
 
@@ -98,12 +89,10 @@ public class MessagesController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping(value = "/update-messages")
     public String getUpdateMessages(Model model, @org.springframework.lang.Nullable  @RequestParam("friendId") Long friendId) {
-
         UserApp currentLoggedUser = customUserService.getLoggedUser();
         UserApp friend = customUserService.findUserById(friendId);
         model.addAttribute("friend", friend);
         model.addAttribute("current_logged_user", customUserService.getLoggedUser());
-
         /*
         Lista osób z którymi można porozmawiać:
         - Zdobycie 2 list wiadomosci - wysłanych i otrzymanych -  zalogowanego użytkownika
@@ -112,7 +101,6 @@ public class MessagesController {
         Set<UserApp> friendsList = customUserService.findUsersFriend(currentLoggedUser);
         model.addAttribute("users_list", friendsList);
         model.addAttribute("messages", messagesService.getMessagesBySenderAndReceipientId(friend, currentLoggedUser));
-
         return "/account-menu/account-private-messages :: #updateMessages";
     }
 
@@ -124,16 +112,13 @@ public class MessagesController {
                                                     @RequestParam(value = "textMsg") String textMsg){
 
         MessagesDto messagesDto = messagesService.createMessage(textMsg, recipientId);
-
 //                MessagesDto.builder()
 //                .textMsg(textMsg)
 //                .createdDate(LocalDateTime.now())
 //                .sender(customUserService.findUserById(senderId))
 //                .recipient(customUserService.findUserById(recipientId))
 //                .build();
-
         messagesService.saveMessage(messagesMapper.reverseMap(messagesDto));
-
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", recipientId);
         return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
